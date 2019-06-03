@@ -47,6 +47,6 @@ TEST_CASE("zip one or more iterable", "[zip]") {
   int arr[] = {1, 2, 3, 4};
   std::vector vec = {'a', 'b', 'c', 'd'};
   for (auto[integer, character]: zip(arr, vec)) {
-
+    std::cout << "int: " << integer << " char: " << character << '\n';
   }
 }

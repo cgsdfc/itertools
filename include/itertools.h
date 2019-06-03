@@ -22,8 +22,8 @@ public:
 
 template <class Iterable>
 using iterator_maybe_const = std::conditional_t<std::is_const_v<Iterable>,
-                                                decltype(std::cbegin(std::declval<Iterable>())),
-                                                decltype(std::begin(std::declval<Iterable>()))>;
+                                                decltype(std::cbegin(std::declval<Iterable &>())),
+                                                decltype(std::begin(std::declval<Iterable &>()))>;
 
 template <template <class...> class FunctionIterator, class ... Iterable>
 using IterableWrapper = IterableAdapter<
@@ -78,18 +78,6 @@ template <class ... Iterators>
 class zip_iterator : public std::iterator<std::forward_iterator_tag, zip_value_type<Iterators...>> {
   using index_sequence = std::index_sequence_for<Iterators...>;
   std::tuple<Iterators...> iterators_;
-  template <std::size_t ... Is>
-  bool compare(const zip_iterator &that, std::index_sequence<Is...>) const {
-    return (... || (std::get<Is>(iterators_) == std::get<Is>(that.iterators_)));
-  }
-  template <std::size_t ... Is>
-  auto star_all(std::index_sequence<Is ...>) const {
-    return std::make_tuple((*std::get<Is>(iterators_))...);
-  }
-  template <std::size_t ... Is>
-  void inc_all(std::index_sequence<Is ...>) {
-    (++std::get<Is>(iterators_), ...);
-  }
 
 public:
   using value_type = zip_value_type<Iterators...>;
@@ -108,6 +96,19 @@ public:
   zip_iterator &operator++() {
     inc_all(index_sequence());
     return *this;
+  }
+private:
+  template <std::size_t ... Is>
+  bool compare(const zip_iterator &that, std::index_sequence<Is...>) const {
+    return (... || (std::get<Is>(iterators_) == std::get<Is>(that.iterators_)));
+  }
+  template <std::size_t ... Is>
+  value_type star_all(std::index_sequence<Is ...>) const {
+    return {(*std::get<Is>(iterators_))...};
+  }
+  template <std::size_t ... Is>
+  void inc_all(std::index_sequence<Is ...>) {
+    (++std::get<Is>(iterators_), ...);
   }
 };
 
