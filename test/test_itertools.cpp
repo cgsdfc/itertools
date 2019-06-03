@@ -41,6 +41,20 @@ TEST_CASE("normal iterating", "[enumerate]") {
       REQUIRE(item.first + 1 == item.second);
     }
   }
+
+  SECTION("C array can be used") {
+    int arr[] = {1, 2, 3, 4};
+    for (auto[id, val]:enumerate(arr)) {
+      REQUIRE(id == val - 1);
+    }
+  }
+
+  SECTION("initializer_list can be used") {
+    std::initializer_list<int> init = {1, 2, 3, 4};
+    for (auto[id, val]:enumerate(init)) {
+      REQUIRE(id == val - 1);
+    }
+  }
 }
 
 TEST_CASE("zip one or more iterable", "[zip]") {
