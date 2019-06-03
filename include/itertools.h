@@ -16,8 +16,8 @@ class IterableAdapter {
 public:
   using iterator = Iterator;
   IterableAdapter(Iterator begin, Iterator end) : begin_(begin), end_(end) {}
-  Iterator begin() { return begin_; }
-  Iterator end() { return end_; }
+  Iterator begin() const { return begin_; }
+  Iterator end() const { return end_; }
 };
 
 template <class Iterable>
@@ -51,7 +51,7 @@ public:
     ++start_;
     return *this;
   }
-  value_type operator*() {
+  value_type operator*() const {
     return {start_, *iter_};
   }
 };
@@ -70,7 +70,5 @@ public:
 
 }
 
-namespace std {
 
-}
 #endif //ITERTOOLS_ITERTOOLS_H

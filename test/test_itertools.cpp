@@ -38,7 +38,7 @@ TEST_CASE("normal iterating", "[enumerate]") {
   SECTION("iterate over const container") {
     const std::vector<int> const_vec = {1, 2, 3};
     for (auto item : enumerate(const_vec)) {
-
+      REQUIRE(item.first + 1 == item.second);
     }
   }
 }
