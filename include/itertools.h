@@ -20,6 +20,14 @@ public:
   Iterator end() { return end_; }
 };
 
+template <class Iterable>
+using iterator_maybe_const = std::conditional_t<std::is_const_v<Iterable>,
+                                                typename Iterable::const_iterator,
+                                                typename Iterable::iterator>;
+
+template <template <class> class FunctionIterator, class Iterable>
+using IterableWrapper = IterableAdapter<FunctionIterator<iterator_maybe_const<Iterable>>>;
+
 using enum_index_type = int;
 
 template <class Iterator>
@@ -31,7 +39,6 @@ class enum_iterator : public std::iterator<std::forward_iterator_tag, enum_value
   enum_index_type start_;
 public:
   using value_type = enum_value_type<Iterator>;
-
   explicit enum_iterator(Iterator iterator, enum_index_type start = 0) : iter_(iterator), start_(start) {}
   bool operator==(const enum_iterator &that) const {
     return iter_ == that.iter_;
@@ -50,10 +57,10 @@ public:
 };
 
 template <class Iterable>
-class enumerate : public IterableAdapter<enum_iterator<typename Iterable::iterator>> {
+class enumerate : public IterableWrapper<enum_iterator, Iterable> {
 public:
-  using Base =  IterableAdapter<enum_iterator<typename Iterable::iterator>>;
-  using iterator = enum_iterator<typename Iterable::iterator>;
+  using Base =  IterableWrapper<enum_iterator, Iterable>;
+  using iterator = typename Base::iterator;
 
   explicit enumerate(Iterable &iterable, enum_index_type start = 0) : Base(
       iterator(std::begin(iterable), start),
