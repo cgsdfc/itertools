@@ -90,3 +90,45 @@ TEST_CASE("zip one or more iterable", "[zip]") {
 
   }
 }
+
+TEST_CASE("range is a user-friendly integral loop", "[range]") {
+  SECTION("normal 0-based loop") {
+    for (auto i : range(10)) {
+      std::cout << i << " ";
+    }
+    std::cout << '\n';
+  }
+
+  SECTION("specify start") {
+    for (auto i : range(1, 10)) {
+      std::cout << i << " ";
+    }
+    std::cout << '\n';
+  }
+
+  SECTION("specify step") {
+    for (auto i : range(0, 10, 2)) {
+      std::cout << i << " ";
+    }
+    std::cout << '\n';
+    for (auto i : range(1, 10, 2)) {
+      std::cout << i << " ";
+    }
+    std::cout << '\n';
+  }
+
+  SECTION("negative step") {
+    for (auto i : range(10, 0, -1)) {
+      std::cout << i << " ";
+    }
+    std::cout << '\n';
+  }
+
+  SECTION("empty range") {
+    std::vector<int> vec;
+    for (auto i : range(999, 1)) {
+      vec.push_back(i);
+    }
+    REQUIRE(vec.empty());
+  }
+}
