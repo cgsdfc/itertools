@@ -22,11 +22,13 @@ public:
 
 template <class Iterable>
 using iterator_maybe_const = std::conditional_t<std::is_const_v<Iterable>,
-                                                typename Iterable::const_iterator,
-                                                typename Iterable::iterator>;
+                                                decltype(std::cbegin(std::declval<Iterable>())),
+                                                decltype(std::begin(std::declval<Iterable>()))>;
 
-template <template <class> class FunctionIterator, class Iterable>
-using IterableWrapper = IterableAdapter<FunctionIterator<iterator_maybe_const<Iterable>>>;
+template <template <class...> class FunctionIterator, class ... Iterable>
+using IterableWrapper = IterableAdapter<
+    FunctionIterator<iterator_maybe_const<Iterable>...>
+>;
 
 using enum_index_type = int;
 
@@ -68,7 +70,58 @@ public:
   ) {}
 };
 
-}
+// A tuple of references.
+template <class ... Iterators>
+using zip_value_type = std::tuple<typename std::iterator_traits<Iterators>::reference ...>;
 
+template <class ... Iterators>
+class zip_iterator : public std::iterator<std::forward_iterator_tag, zip_value_type<Iterators...>> {
+  using index_sequence = std::index_sequence_for<Iterators...>;
+  std::tuple<Iterators...> iterators_;
+  template <std::size_t ... Is>
+  bool compare(const zip_iterator &that, std::index_sequence<Is...>) const {
+    return (... || (std::get<Is>(iterators_) == std::get<Is>(that.iterators_)));
+  }
+  template <std::size_t ... Is>
+  auto star_all(std::index_sequence<Is ...>) const {
+    return std::make_tuple((*std::get<Is>(iterators_))...);
+  }
+  template <std::size_t ... Is>
+  void inc_all(std::index_sequence<Is ...>) {
+    (++std::get<Is>(iterators_), ...);
+  }
+
+public:
+  using value_type = zip_value_type<Iterators...>;
+  explicit zip_iterator(Iterators ... iterator) : iterators_(iterator...) {}
+
+  bool operator==(const zip_iterator &that) const {
+    // any of these iterators equal.
+    return compare(that, index_sequence());
+  }
+  bool operator!=(const zip_iterator &that) const {
+    return !operator==(that);
+  }
+  value_type operator*() const {
+    return star_all(index_sequence());
+  }
+  zip_iterator &operator++() {
+    inc_all(index_sequence());
+    return *this;
+  }
+};
+
+template <class ... Iterables>
+class zip : public IterableWrapper<zip_iterator, Iterables...> {
+  using Base = IterableWrapper<zip_iterator, Iterables...>;
+  using iterator = typename Base::iterator;
+public:
+  explicit zip(Iterables &... iterables) : Base(
+      iterator(std::begin(iterables)...),
+      iterator(std::end(iterables)...)
+  ) {}
+};
+
+}
 
 #endif //ITERTOOLS_ITERTOOLS_H
