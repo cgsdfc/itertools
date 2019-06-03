@@ -21,13 +21,13 @@ public:
 };
 
 template <class Iterable>
-using iterator_maybe_const = std::conditional_t<std::is_const_v<Iterable>,
+using iter_from_iterable = std::conditional_t<std::is_const_v<Iterable>,
                                                 decltype(std::cbegin(std::declval<Iterable &>())),
                                                 decltype(std::begin(std::declval<Iterable &>()))>;
 
 template <template <class...> class FunctionIterator, class ... Iterable>
 using IterableWrapper = IterableAdapter<
-    FunctionIterator<iterator_maybe_const<Iterable>...>
+    FunctionIterator<iter_from_iterable<Iterable>...>
 >;
 
 using enum_index_type = int;
