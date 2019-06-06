@@ -17,35 +17,36 @@ struct iterable_wrapper;
 
 template <class T>
 struct iterable_wrapper<T &> {
-  using type = T &;
+  using storage_type = T &;
 };
 
 template <class T>
 struct iterable_wrapper<T &&> {
-  using type = T;
+  using storage_type = T;
 };
 
 template <class T, std::size_t N>
 struct iterable_wrapper<T (&&)[N]> {
-  using type = T (&&)[N];
+  using storage_type = T (&&)[N];
 };
 
 template <class T>
 struct iterator_from_iterable {
-  using iterable = typename std::remove_reference<T>::type &;
+  using iterable = typename std::add_lvalue_reference<T>::type;
   using type =  decltype(std::begin(std::declval<iterable>()));
 };
 
 template <class T>
 struct iterable_traits {
-  using iterable = typename iterable_wrapper<T>::type;
-  using iterator = typename iterator_from_iterable<iterable>::type;
-  using value_type = typename std::iterator_traits<iterator>::value_type;
+  using raw_iterable = T;
+  using raw_iterator = typename iterator_from_iterable<raw_iterable>::type;
+  using wrapped_iterable = typename iterable_wrapper<T>::storage_type;
+  using value_type = typename std::iterator_traits<raw_iterator>::value_type;
 };
 
 template <class T>
 struct WrapperBase {
-  using type = typename iterable_wrapper<T>::type;
+  using type = typename iterable_wrapper<T>::storage_type;
   type wrapped;
 };
 
@@ -54,9 +55,6 @@ WrapperBase(T &&) -> WrapperBase<typename std::remove_reference<T>::type &&>;
 
 template <class T>
 WrapperBase(T &) -> WrapperBase<typename std::remove_reference<T>::type &>;
-
-template <class T>
-using wrapped_iterable_type = decltype(WrapperBase<T>::wrapped);
 
 // Adapt an Iterator class to an Iterable class.
 template <class Iterator>
@@ -110,19 +108,22 @@ public:
 
 template <class Iterable>
 class enumerate {
-  wrapped_iterable_type<Iterable> iterable_;
+  using traits = iterable_traits<Iterable>;
+  using iterable_type = typename traits::wrapped_iterable;
+  using iterator_type = typename traits::raw_iterator;
+
+  iterable_type iterable_;
   enum_index_type start_;
 public:
-  using iterator = enum_iterator<iter_from_iterable<Iterable>>;
-
+  using iterator = enum_iterator<iterator_type>;
   explicit enumerate(Iterable &&iterable, enum_index_type start = 0)
       : iterable_(std::forward<Iterable>(iterable)), start_(start) {}
 
-  iterator begin() const {
-    return iterator{std::begin(iterable_), start_};
+  iterator begin() {
+    return iterator(std::begin(iterable_), start_);
   }
-  iterator end() const {
-    return iterator{std::end(iterable_), 0};
+  iterator end() {
+    return iterator(std::end(iterable_), 0);
   }
 };
 

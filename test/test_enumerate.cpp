@@ -5,7 +5,7 @@
 #include "itertools.h"
 using itertools::enumerate;
 
-TEST_CASE("normal iterating", "[enumerate]") {
+TEST_CASE("", "[enumerate][lvalue]") {
   std::vector vec = {1, 2, 3};
   SECTION("iterate") {
     for (auto item : enumerate(vec)) {
@@ -50,6 +50,21 @@ TEST_CASE("normal iterating", "[enumerate]") {
     std::initializer_list<int> init = {1, 2, 3, 4};
     for (auto[id, val]:enumerate(init)) {
       REQUIRE(id == val - 1);
+    }
+  }
+}
+
+TEST_CASE("", "[enumerate][rvalue]") {
+  SECTION("array") {
+    auto e = enumerate((int[]) {1, 2});
+    for (auto item: e) {
+      printf("%d %d\n", item.first, item.second);
+    }
+  }
+  SECTION("vector") {
+    auto e = enumerate(std::vector{1, 2});
+    for (auto item: e) {
+      printf("%d %d\n", item.first, item.second);
     }
   }
 }

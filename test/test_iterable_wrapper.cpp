@@ -20,7 +20,7 @@ TEST_CASE("rvalue ref as member should expand object's life time") {
   REQUIRE(w.t[0] == 2);
 }
 
-TEST_CASE("rvalue", "[WrapperBase]") {
+TEST_CASE("", "[WrapperBase][rvalue]") {
   int arr[] = {1, 2};
   std::vector vec{1, 2, 3};
 
@@ -35,7 +35,7 @@ TEST_CASE("rvalue", "[WrapperBase]") {
   }
 }
 
-TEST_CASE("lvalue", "[WrapperBase]") {
+TEST_CASE("", "[WrapperBase][lvalue]") {
   int arr[] = {1, 2};
   std::vector vec{1, 2, 3};
 
