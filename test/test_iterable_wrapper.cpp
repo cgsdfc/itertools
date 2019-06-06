@@ -5,6 +5,9 @@
 #include <type_traits>
 #include <iostream>
 #include <cstring>
+#include "itertools.h"
+
+using itertools::WrapperBase;
 
 template <class T>
 struct Wrapper {
@@ -90,30 +93,6 @@ TEST_CASE("IterableWrapper should work in both cases", "[util]") {
   }
 //  std::reference_wrapper
 }
-
-template <class T>
-struct WrapperBase;
-
-template <class T>
-struct WrapperBase<T &> {
-  T &wrapped;
-};
-
-template <class T>
-struct WrapperBase<T &&> {
-  T wrapped;
-};
-
-template <class T, std::size_t N>
-struct WrapperBase<T (&&)[N]> {
-  T (&&wrapped)[N];
-};
-
-template <class T>
-WrapperBase(T &&) -> WrapperBase<typename std::remove_reference<T>::type &&>;
-
-template <class T>
-WrapperBase(T &) -> WrapperBase<typename std::remove_reference<T>::type &>;
 
 TEST_CASE("rvalue", "[WrapperBase]") {
   int arr[] = {1, 2};

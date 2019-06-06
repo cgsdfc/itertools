@@ -4,9 +4,38 @@
 
 #ifndef ITERTOOLS_ITERTOOLS_H
 #define ITERTOOLS_ITERTOOLS_H
+
 #include <iterator>
+#include <catch2/catch.hpp>
+#include <type_traits>
+#include <iostream>
+#include <cstring>
 
 namespace itertools {
+template <class T>
+struct WrapperBase;
+
+template <class T>
+struct WrapperBase<T &> {
+  T &wrapped;
+};
+
+template <class T>
+struct WrapperBase<T &&> {
+  T wrapped;
+};
+
+template <class T, std::size_t N>
+struct WrapperBase<T (&&)[N]> {
+  T (&&wrapped)[N];
+};
+
+
+template <class T>
+WrapperBase(T &&) -> WrapperBase<typename std::remove_reference<T>::type &&>;
+
+template <class T>
+WrapperBase(T &) -> WrapperBase<typename std::remove_reference<T>::type &>;
 
 // Adapt an Iterator class to an Iterable class.
 template <class Iterator>
@@ -241,7 +270,6 @@ public:
   count_iterator(Integer start, Integer step) : start_(start), step_(step) {}
 
 };
-
 
 }
 
