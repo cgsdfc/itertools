@@ -17,17 +17,17 @@ struct iterable_wrapper;
 
 template <class T>
 struct iterable_wrapper<T &> {
-  using storage_type = T &;
+  using type = T &;
 };
 
 template <class T>
 struct iterable_wrapper<T &&> {
-  using storage_type = T;
+  using type = T;
 };
 
 template <class T, std::size_t N>
 struct iterable_wrapper<T (&&)[N]> {
-  using storage_type = T (&&)[N];
+  using type = T (&&)[N];
 };
 
 template <class T>
@@ -40,51 +40,30 @@ template <class T>
 struct iterable_traits {
   using raw_iterable = T;
   using raw_iterator = typename iterator_from_iterable<raw_iterable>::type;
-  using wrapped_iterable = typename iterable_wrapper<T>::storage_type;
+  using wrapped_iterable = typename iterable_wrapper<T>::type;
   using value_type = decltype(*std::declval<raw_iterator>());
 };
 
-// Adapt an Iterator class to an Iterable class.
-template <class Iterator>
-class IterableAdapter {
-  Iterator begin_;
-  Iterator end_;
-public:
-  using iterator = Iterator;
-  IterableAdapter(Iterator begin, Iterator end) : begin_(begin), end_(end) {}
-  Iterator begin() const { return begin_; }
-  Iterator end() const { return end_; }
-};
-
-template <class Iterable>
-using iter_from_iterable = std::conditional_t<std::is_const_v<Iterable>,
-                                              decltype(std::cbegin(std::declval<Iterable &>())),
-                                              decltype(std::begin(std::declval<Iterable &>()))>;
-
-template <template <class...> class FunctionIterator, class ... Iterable>
-using IterableWrapper = IterableAdapter<
-    FunctionIterator<iter_from_iterable<Iterable>...>
->;
-
-
-// TODO: value_type handling.
-// if the value is backed by some storage, allow reference.
-// if the value is generated on the fly, use copy.
-// for now, always use copy for safe.
-
+#define ITERTOOLS_IMPL_MUTABLE_BEGIN_END(type_name) \
+  iterator begin() const {\
+    return const_cast<type_name *>(this)->begin();\
+  }\
+  iterator end() const {\
+    return const_cast<type_name *>(this)->end();\
+  }
 
 using enumerate_index_type = int;
 
 template <class Iterable>
 class enumerate {
+public:
   using traits = iterable_traits<Iterable>;
   using wrapped_iterable = typename traits::wrapped_iterable;
-  using wrapped_iterator = typename traits::raw_iterator;
-  using iterable = enumerate;
+  using raw_iterator = typename traits::raw_iterator;
   using value_type = std::pair<enumerate_index_type, typename traits::value_type>;
 
   class iterator : public std::iterator<std::forward_iterator_tag, value_type> {
-    using Iterator = wrapped_iterator;
+    using Iterator = raw_iterator;
     Iterator iter_;
     enumerate_index_type start_;
   public:
@@ -105,9 +84,6 @@ class enumerate {
     }
   };
 
-  wrapped_iterable iterable_;
-  enumerate_index_type start_;
-public:
   explicit enumerate(Iterable &&iterable, enumerate_index_type start = 0)
       : iterable_(std::forward<Iterable>(iterable)), start_(start) {}
 
@@ -117,69 +93,79 @@ public:
   iterator end() {
     return iterator(std::end(iterable_), 0);
   }
-  iterator begin() const {
-    return const_cast<enumerate *>(this)->begin();
-  }
-  iterator end() const {
-    return const_cast<enumerate *>(this)->end();
-  }
+  ITERTOOLS_IMPL_MUTABLE_BEGIN_END(enumerate)
+private:
+  wrapped_iterable iterable_;
+  enumerate_index_type start_;
 };
 
 template <class Iterable> enumerate(Iterable &, enumerate_index_type= 0) -> enumerate<Iterable &>;
 template <class Iterable> enumerate(Iterable &&, enumerate_index_type= 0) -> enumerate<Iterable &&>;
 
-// A tuple of references.
-template <class ... Iterators>
-using zip_value_type = std::tuple<typename std::iterator_traits<Iterators>::reference ...>;
-
-template <class ... Iterators>
-class zip_iterator : public std::iterator<std::forward_iterator_tag, zip_value_type<Iterators...>> {
-  using index_sequence = std::index_sequence_for<Iterators...>;
-  std::tuple<Iterators...> iterators_;
-
+template <class ... Iterables>
+class zip {
 public:
-  using value_type = zip_value_type<Iterators...>;
-  explicit zip_iterator(Iterators ... iterator) : iterators_(iterator...) {}
+  using value_type = std::tuple<typename iterable_traits<Iterables>::value_type...>;
+  using wrapped_iterables = std::tuple<typename iterable_traits<Iterables>::wrapped_iterable ...>;
+  using raw_iterators = std::tuple<typename iterable_traits<Iterables>::raw_iterator ...>;
+  using index_sequence = std::index_sequence_for<Iterables...>;
 
-  bool operator==(const zip_iterator &that) const {
-    // any of these iterators equal.
-    return compare(that, index_sequence());
+  class iterator {
+    raw_iterators iterators_;
+  public:
+    explicit iterator(raw_iterators iterators) : iterators_(std::move(iterators)) {}
+    bool operator==(const iterator &that) const {
+      // any of these iterators equal.
+      return compare(that, index_sequence());
+    }
+    bool operator!=(const iterator &that) const {
+      return !operator==(that);
+    }
+    value_type operator*() const {
+      return star_all(index_sequence());
+    }
+    iterator &operator++() {
+      inc_all(index_sequence());
+      return *this;
+    }
+  private:
+    template <std::size_t ... Is>
+    bool compare(const iterator &that, std::index_sequence<Is...>) const {
+      return (... || (std::get<Is>(iterators_) == std::get<Is>(that.iterators_)));
+    }
+    template <std::size_t ... Is>
+    value_type star_all(std::index_sequence<Is ...>) const {
+      return {(*std::get<Is>(iterators_))...};
+    }
+    template <std::size_t ... Is>
+    void inc_all(std::index_sequence<Is ...>) {
+      (++std::get<Is>(iterators_), ...);
+    }
+  };
+
+  explicit zip(Iterables &&...iterables) : iterables_(std::forward<Iterables>(iterables)...) {}
+
+  iterator begin() {
+    return iterator(begin_impl(index_sequence()));
   }
-  bool operator!=(const zip_iterator &that) const {
-    return !operator==(that);
+  iterator end() {
+    return iterator(end_impl(index_sequence()));
   }
-  value_type operator*() const {
-    return star_all(index_sequence());
-  }
-  zip_iterator &operator++() {
-    inc_all(index_sequence());
-    return *this;
-  }
+  ITERTOOLS_IMPL_MUTABLE_BEGIN_END(zip)
 private:
+  wrapped_iterables iterables_;
   template <std::size_t ... Is>
-  bool compare(const zip_iterator &that, std::index_sequence<Is...>) const {
-    return (... || (std::get<Is>(iterators_) == std::get<Is>(that.iterators_)));
+  iterator begin_impl(std::index_sequence<Is...>) {
+    return iterator(std::tuple(std::begin(std::get<Is>(iterables_))...));
   }
   template <std::size_t ... Is>
-  value_type star_all(std::index_sequence<Is ...>) const {
-    return {(*std::get<Is>(iterators_))...};
-  }
-  template <std::size_t ... Is>
-  void inc_all(std::index_sequence<Is ...>) {
-    (++std::get<Is>(iterators_), ...);
+  iterator end_impl(std::index_sequence<Is...>) {
+    return iterator(std::tuple(std::end(std::get<Is>(iterables_))...));
   }
 };
 
 template <class ... Iterables>
-class zip : public IterableWrapper<zip_iterator, Iterables...> {
-  using Base = IterableWrapper<zip_iterator, Iterables...>;
-  using iterator = typename Base::iterator;
-public:
-  explicit zip(Iterables &... iterables) : Base(
-      iterator(std::begin(iterables)...),
-      iterator(std::end(iterables)...)
-  ) {}
-};
+zip(Iterables &&...) -> zip<Iterables && ...>;
 
 template <class Integer>
 class range_iterator : public std::iterator<std::forward_iterator_tag, Integer> {
@@ -247,6 +233,7 @@ public:
   }
 };
 
+#if 0
 template <class Callable, class ... Iterators>
 using map_value_type = std::invoke_result_t<Callable, typename std::iterator_traits<Iterators>::value_type ...>;
 
@@ -274,14 +261,15 @@ public:
 };
 
 template <class Callable, class ... Iterables>
-class map : public IterableAdapter<map_iterator<Callable, iter_from_iterable<Iterables>...>> {
+class map : public IterableAdapter<map_iterator<Callable, iter_from_iterable < Iterables>...>>
+{
 public:
-  using Base = IterableAdapter<map_iterator<Callable, iter_from_iterable<Iterables>...>>;
-  using iterator = typename Base::iterator;
-  explicit map(Callable func, Iterables &... iterables) : Base(
-      iterator(func, std::begin(iterables)...),
-      iterator(func, std::end(iterables)...)
-  ) {}
+using Base = IterableAdapter<map_iterator<Callable, iter_from_iterable < Iterables>...>>;
+using iterator = typename Base::iterator;
+explicit map(Callable func, Iterables &... iterables) : Base(
+    iterator(func, std::begin(iterables)...),
+    iterator(func, std::end(iterables)...)
+) {}
 };
 
 template <class Integer>
@@ -292,7 +280,7 @@ public:
   count_iterator(Integer start, Integer step) : start_(start), step_(step) {}
 
 };
-
+#endif
 }
 
 #endif //ITERTOOLS_ITERTOOLS_H

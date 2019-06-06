@@ -11,7 +11,7 @@ using itertools::iterable_wrapper;
 
 template <class T>
 struct WrapperBase {
-  using type = typename iterable_wrapper<T>::storage_type;
+  using type = typename iterable_wrapper<T>::type;
   type wrapped;
 };
 
