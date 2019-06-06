@@ -6,10 +6,13 @@
 #define ITERTOOLS_DETAIL_H
 #include <iterator>
 #include <type_traits>
+#include <initializer_list>
 
 namespace itertools {
 template <class T>
-struct iterable_wrapper;
+struct iterable_wrapper {
+  using type = T;
+};
 template <class T>
 struct iterable_wrapper<T &> {
   using type = T &;
@@ -32,7 +35,7 @@ struct iterable_traits {
   using raw_iterable = T;
   using raw_iterator = typename iterator_from_iterable<raw_iterable>::type;
   using wrapped_iterable = typename iterable_wrapper<T>::type;
-  using value_type = decltype(*std::declval<raw_iterator>());
+  using deref_value_type = decltype(*std::declval<raw_iterator>());
 };
 
 }

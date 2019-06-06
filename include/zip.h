@@ -13,12 +13,12 @@ namespace itertools {
 template <class ... Iterables>
 class zip {
 public:
-  using value_type = std::tuple<typename iterable_traits<Iterables>::value_type...>;
+  using value_type = std::tuple<typename iterable_traits<Iterables>::deref_value_type...>;
   using wrapped_iterables = std::tuple<typename iterable_traits<Iterables>::wrapped_iterable ...>;
   using raw_iterators = std::tuple<typename iterable_traits<Iterables>::raw_iterator ...>;
   using index_sequence = std::index_sequence_for<Iterables...>;
 
-  class iterator {
+  class iterator : public std::iterator<std::forward_iterator_tag, value_type> {
     raw_iterators iterators_;
   public:
     explicit iterator(raw_iterators iterators) : iterators_(std::move(iterators)) {}

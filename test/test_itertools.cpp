@@ -9,49 +9,15 @@
 
 using namespace itertools;
 
+struct ILStore {
+};
+
+TEST_CASE("can we store an initializer_list?", "[util]") {
+  std::initializer_list<int> t{1, 2, 3};
+}
+
 #if 0
 
-TEST_CASE("range is a user-friendly integral loop", "[range]") {
-  SECTION("normal 0-based loop") {
-    for (auto i : range(10)) {
-      std::cout << i << " ";
-    }
-    std::cout << '\n';
-  }
-
-  SECTION("specify start") {
-    for (auto i : range(1, 10)) {
-      std::cout << i << " ";
-    }
-    std::cout << '\n';
-  }
-
-  SECTION("specify step") {
-    for (auto i : range(0, 10, 2)) {
-      std::cout << i << " ";
-    }
-    std::cout << '\n';
-    for (auto i : range(1, 10, 2)) {
-      std::cout << i << " ";
-    }
-    std::cout << '\n';
-  }
-
-  SECTION("negative step") {
-    for (auto i : range(10, 0, -1)) {
-      std::cout << i << " ";
-    }
-    std::cout << '\n';
-  }
-
-  SECTION("empty range") {
-    std::vector<int> vec;
-    for (auto i : range(999, 1)) {
-      vec.push_back(i);
-    }
-    REQUIRE(vec.empty());
-  }
-}
 
 TEST_CASE("map(func, iterables...)", "[map]") {
   SECTION("basic with C array") {

@@ -14,7 +14,7 @@ public:
   using traits = iterable_traits<Iterable>;
   using wrapped_iterable = typename traits::wrapped_iterable;
   using raw_iterator = typename traits::raw_iterator;
-  using value_type = std::pair<enumerate_index_type, typename traits::value_type>;
+  using value_type = std::pair<enumerate_index_type, typename traits::deref_value_type>;
 
   class iterator : public std::iterator<std::forward_iterator_tag, value_type> {
     using Iterator = raw_iterator;
@@ -54,5 +54,4 @@ private:
 };
 
 template <class Iterable> enumerate(Iterable &&, enumerate_index_type= 0) -> enumerate<Iterable &&>;
-
 }

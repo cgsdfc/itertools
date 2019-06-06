@@ -28,6 +28,7 @@ target_sources( test_itertools PRIVATE
                 test/test_iterable_wrapper.cpp
                 test/test_enumerate.cpp
                 test/test_zip.cpp
+                test/test_range.cpp
                 test/test_itertools.cpp )
 target_link_libraries( test_itertools itertools Catch2::Catch2 )
 
