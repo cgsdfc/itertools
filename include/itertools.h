@@ -22,8 +22,8 @@ public:
 
 template <class Iterable>
 using iter_from_iterable = std::conditional_t<std::is_const_v<Iterable>,
-                                                decltype(std::cbegin(std::declval<Iterable &>())),
-                                                decltype(std::begin(std::declval<Iterable &>()))>;
+                                              decltype(std::cbegin(std::declval<Iterable &>())),
+                                              decltype(std::begin(std::declval<Iterable &>()))>;
 
 template <template <class...> class FunctionIterator, class ... Iterable>
 using IterableWrapper = IterableAdapter<
@@ -41,7 +41,7 @@ class enum_iterator : public std::iterator<std::forward_iterator_tag, enum_value
   enum_index_type start_;
 public:
   using value_type = enum_value_type<Iterator>;
-  explicit enum_iterator(Iterator iterator, enum_index_type start = 0) : iter_(iterator), start_(start) {}
+  enum_iterator(Iterator iterator, enum_index_type start) : iter_(iterator), start_(start) {}
   bool operator==(const enum_iterator &that) const {
     return iter_ == that.iter_;
   }
@@ -59,16 +59,23 @@ public:
 };
 
 template <class Iterable>
-class enumerate : public IterableWrapper<enum_iterator, Iterable> {
+class enumerate {
+  Iterable &iterable_;
+  enum_index_type start_;
 public:
-  using Base =  IterableWrapper<enum_iterator, Iterable>;
-  using iterator = typename Base::iterator;
-
-  explicit enumerate(Iterable &iterable, enum_index_type start = 0) : Base(
-      iterator(std::begin(iterable), start),
-      iterator(std::end(iterable))
-  ) {}
+  using iterator = enum_iterator<iter_from_iterable<Iterable>>;
+  explicit enumerate(Iterable &iterable, enum_index_type start = 0)
+      : iterable_((iterable)), start_(start) {}
+  iterator begin() const {
+    return iterator{std::begin(iterable_), start_};
+  }
+  iterator end() const {
+    return iterator{std::end(iterable_), 0};
+  }
 };
+
+//template <class Iterable>
+//enumerate(Iterable &, enum_index_type start = 0) -> enumerate<>;
 
 // A tuple of references.
 template <class ... Iterators>
@@ -188,6 +195,54 @@ public:
     return {length_, start_, step_};
   }
 };
+
+template <class Callable, class ... Iterators>
+using map_value_type = std::invoke_result_t<Callable, typename std::iterator_traits<Iterators>::value_type ...>;
+
+template <class Callable, class ... Iterators>
+class map_iterator : public std::iterator<std::forward_iterator_tag, map_value_type<Callable, Iterators...>> {
+  Callable func_;
+  zip_iterator<Iterators...> args_;
+public:
+  using value_type = map_value_type<Callable, Iterators...>;
+  explicit map_iterator(Callable func, Iterators ... iterators) : func_(func), args_(iterators...) {}
+  bool operator==(const map_iterator &rhs) const {
+    return args_ == rhs.args_;
+  }
+  bool operator!=(const map_iterator &rhs) const {
+    return !(rhs == *this);
+  }
+  map_iterator &operator++() {
+    ++args_;
+    return *this;
+  }
+  value_type operator*() const {
+    auto &&arg_tuple = *args_;
+    return std::apply(func_, arg_tuple);
+  }
+};
+
+template <class Callable, class ... Iterables>
+class map : public IterableAdapter<map_iterator<Callable, iter_from_iterable<Iterables>...>> {
+public:
+  using Base = IterableAdapter<map_iterator<Callable, iter_from_iterable<Iterables>...>>;
+  using iterator = typename Base::iterator;
+  explicit map(Callable func, Iterables &... iterables) : Base(
+      iterator(func, std::begin(iterables)...),
+      iterator(func, std::end(iterables)...)
+  ) {}
+};
+
+template <class Integer>
+class count_iterator {
+  Integer start_ = 0;
+  Integer step_ = 1;
+public:
+  count_iterator(Integer start, Integer step) : start_(start), step_(step) {}
+
+};
+
+
 }
 
 #endif //ITERTOOLS_ITERTOOLS_H

@@ -20,8 +20,12 @@ include( Catch )
 add_executable( test_itertools )
 target_sources( test_itertools PRIVATE
                 test/test_main.cpp
+                test/test_iterable_wrapper.cpp
                 test/test_itertools.cpp )
 target_link_libraries( test_itertools itertools Catch2::Catch2 )
 
 # automatically install tests.
 catch_discover_tests( test_itertools )
+
+#install( TARGETS itertools DESTINATION include )
+install(FILES include/itertools.h DESTINATION include)

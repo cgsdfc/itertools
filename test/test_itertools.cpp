@@ -132,3 +132,21 @@ TEST_CASE("range is a user-friendly integral loop", "[range]") {
     REQUIRE(vec.empty());
   }
 }
+
+TEST_CASE("map(func, iterables...)", "[map]") {
+  SECTION("basic with C array") {
+    int arr[] = {1, 2, 3};
+    for (auto i : map([](auto x) { return x * 2; }, arr)) {
+      std::cout << i << ' ';
+    }
+    std::cout << '\n';
+  }
+
+  SECTION("with range") {
+    std::tuple t = {1};
+    auto r = range(100000l);
+//    for (auto x : map([](auto x) { return x * x; }, r)) {
+//
+//    }
+  }
+}
