@@ -53,7 +53,6 @@ private:
   enumerate_index_type start_;
 };
 
-template <class Iterable> enumerate(Iterable &, enumerate_index_type= 0) -> enumerate<Iterable &>;
 template <class Iterable> enumerate(Iterable &&, enumerate_index_type= 0) -> enumerate<Iterable &&>;
 
 }
