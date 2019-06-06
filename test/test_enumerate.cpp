@@ -67,4 +67,11 @@ TEST_CASE("", "[enumerate][rvalue]") {
       printf("%d %d\n", item.first, item.second);
     }
   }
+  SECTION("range") {
+    using itertools::range;
+    auto e = enumerate(range(10));
+    for (auto item: e) {
+      printf("%d %d\n", item.first, item.second);
+    }
+  }
 }

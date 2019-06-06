@@ -41,20 +41,8 @@ struct iterable_traits {
   using raw_iterable = T;
   using raw_iterator = typename iterator_from_iterable<raw_iterable>::type;
   using wrapped_iterable = typename iterable_wrapper<T>::storage_type;
-  using value_type = typename std::iterator_traits<raw_iterator>::value_type;
+  using value_type = decltype(*std::declval<raw_iterator>());
 };
-
-template <class T>
-struct WrapperBase {
-  using type = typename iterable_wrapper<T>::storage_type;
-  type wrapped;
-};
-
-template <class T>
-WrapperBase(T &&) -> WrapperBase<typename std::remove_reference<T>::type &&>;
-
-template <class T>
-WrapperBase(T &) -> WrapperBase<typename std::remove_reference<T>::type &>;
 
 // Adapt an Iterator class to an Iterable class.
 template <class Iterator>
@@ -78,45 +66,49 @@ using IterableWrapper = IterableAdapter<
     FunctionIterator<iter_from_iterable<Iterable>...>
 >;
 
-using enum_index_type = int;
 
-template <class Iterator>
-using enum_value_type = std::pair<int, typename std::iterator_traits<Iterator>::reference>;
+// TODO: value_type handling.
+// if the value is backed by some storage, allow reference.
+// if the value is generated on the fly, use copy.
+// for now, always use copy for safe.
 
-template <class Iterator>
-class enum_iterator : public std::iterator<std::forward_iterator_tag, enum_value_type<Iterator>> {
-  Iterator iter_;
-  enum_index_type start_;
-public:
-  using value_type = enum_value_type<Iterator>;
-  enum_iterator(Iterator iterator, enum_index_type start) : iter_(iterator), start_(start) {}
-  bool operator==(const enum_iterator &that) const {
-    return iter_ == that.iter_;
-  }
-  bool operator!=(const enum_iterator &that) const {
-    return !operator==(that);
-  }
-  enum_iterator &operator++() {
-    ++iter_;
-    ++start_;
-    return *this;
-  }
-  value_type operator*() const {
-    return {start_, *iter_};
-  }
-};
+
+using enumerate_index_type = int;
 
 template <class Iterable>
 class enumerate {
   using traits = iterable_traits<Iterable>;
-  using iterable_type = typename traits::wrapped_iterable;
-  using iterator_type = typename traits::raw_iterator;
+  using wrapped_iterable = typename traits::wrapped_iterable;
+  using wrapped_iterator = typename traits::raw_iterator;
+  using iterable = enumerate;
+  using value_type = std::pair<enumerate_index_type, typename traits::value_type>;
 
-  iterable_type iterable_;
-  enum_index_type start_;
+  class iterator : public std::iterator<std::forward_iterator_tag, value_type> {
+    using Iterator = wrapped_iterator;
+    Iterator iter_;
+    enumerate_index_type start_;
+  public:
+    iterator(Iterator iterator, enumerate_index_type start) : iter_(iterator), start_(start) {}
+    bool operator==(const iterator &that) const {
+      return iter_ == that.iter_;
+    }
+    bool operator!=(const iterator &that) const {
+      return !operator==(that);
+    }
+    iterator &operator++() {
+      ++iter_;
+      ++start_;
+      return *this;
+    }
+    value_type operator*() const {
+      return {start_, *iter_};
+    }
+  };
+
+  wrapped_iterable iterable_;
+  enumerate_index_type start_;
 public:
-  using iterator = enum_iterator<iterator_type>;
-  explicit enumerate(Iterable &&iterable, enum_index_type start = 0)
+  explicit enumerate(Iterable &&iterable, enumerate_index_type start = 0)
       : iterable_(std::forward<Iterable>(iterable)), start_(start) {}
 
   iterator begin() {
@@ -125,13 +117,16 @@ public:
   iterator end() {
     return iterator(std::end(iterable_), 0);
   }
+  iterator begin() const {
+    return const_cast<enumerate *>(this)->begin();
+  }
+  iterator end() const {
+    return const_cast<enumerate *>(this)->end();
+  }
 };
 
-template <class Iterable> enumerate(Iterable &, enum_index_type= 0) -> enumerate<Iterable &>;
-template <class Iterable> enumerate(Iterable &&, enum_index_type= 0) -> enumerate<Iterable &&>;
-
-//template <class Iterable>
-//enumerate(Iterable &, enum_index_type start = 0) -> enumerate<>;
+template <class Iterable> enumerate(Iterable &, enumerate_index_type= 0) -> enumerate<Iterable &>;
+template <class Iterable> enumerate(Iterable &&, enumerate_index_type= 0) -> enumerate<Iterable &&>;
 
 // A tuple of references.
 template <class ... Iterators>

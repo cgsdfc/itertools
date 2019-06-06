@@ -7,8 +7,19 @@
 #include <cstring>
 #include "itertools.h"
 
-using itertools::WrapperBase;
+using itertools::iterable_wrapper;
 
+template <class T>
+struct WrapperBase {
+  using type = typename iterable_wrapper<T>::storage_type;
+  type wrapped;
+};
+
+template <class T>
+WrapperBase(T &&) -> WrapperBase<typename std::remove_reference<T>::type &&>;
+
+template <class T>
+WrapperBase(T &) -> WrapperBase<typename std::remove_reference<T>::type &>;
 struct RValueRefWrapper {
   std::vector<int> &&t;
 };
