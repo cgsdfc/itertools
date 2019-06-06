@@ -3,8 +3,8 @@
 //
 #include <catch2/catch.hpp>
 #include <iostream>
-#include "enumerate.h"
-#include "range.h"
+#include "itertools/enumerate.h"
+#include "itertools/range.h"
 using itertools::enumerate;
 
 TEST_CASE("", "[enumerate][lvalue]") {

@@ -4,8 +4,8 @@
 
 #include <catch2/catch.hpp>
 #include <iostream>
-#include "range.h"
-#include "zip.h"
+#include "itertools/range.h"
+#include "itertools/zip.h"
 using itertools::range;
 
 TEST_CASE("range is a user-friendly integral loop", "[range]") {

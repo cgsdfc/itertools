@@ -5,9 +5,9 @@
 #ifndef ITERTOOLS_ITERTOOLS_H
 #define ITERTOOLS_ITERTOOLS_H
 
-#include "enumerate.h"
-#include "zip.h"
-#include "range.h"
+#include "itertools/enumerate.h"
+#include "itertools/zip.h"
+#include "itertools/range.h"
 
 namespace itertools {
 

@@ -5,7 +5,7 @@
 #include <catch2/catch.hpp>
 #include <numeric>
 #include <iostream>
-#include "zip.h"
+#include "itertools/zip.h"
 
 using itertools::zip;
 

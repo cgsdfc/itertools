@@ -6,7 +6,7 @@
 #include <iostream>
 #include <cstring>
 #include "itertools.h"
-#include "detail.h"
+#include "itertools/detail.h"
 
 using itertools::iterable_wrapper;
 

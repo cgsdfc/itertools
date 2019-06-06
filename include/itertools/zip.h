@@ -4,7 +4,7 @@
 
 #ifndef ITERTOOLS_ZIP_H
 #define ITERTOOLS_ZIP_H
-#include "detail.h"
+#include "itertools/detail.h"
 #include "macros.h"
 #include <utility>
 
