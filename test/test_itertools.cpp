@@ -10,38 +10,6 @@
 using namespace itertools;
 
 #if 0
-TEST_CASE("zip one or more iterable", "[zip]") {
-  SECTION("two seqs with identical lens") {
-    int arr[] = {1, 2, 3, 4};
-    std::vector vec = {'a', 'b', 'c', 'd'};
-    for (auto[integer, character]: zip(arr, vec)) {
-      std::cout << "int: " << integer << " char: " << character << '\n';
-    }
-  }
-
-  SECTION("zip one seq should be identical with that seq") {
-    std::vector vec = {1, 2, 3};
-    size_t cnt = 0;
-    for (auto[val]: zip(vec)) {
-      REQUIRE(vec.at(cnt) == val);
-      cnt++;
-    }
-    REQUIRE(cnt == vec.size());
-  }
-
-  SECTION("zip should stop when the shortest seq stops") {
-    std::vector<int> shortest_seq(2);
-    std::iota(shortest_seq.begin(), shortest_seq.end(), 0);
-    const char *str_seq[] = {"One", "Two", "Three"};
-    double db_seq[] = {1., 2., 3., 4.};
-    size_t cnt = 0;
-    for (auto _ : zip(shortest_seq, str_seq, db_seq)) {
-      ++cnt;
-    }
-    REQUIRE(cnt == shortest_seq.size());
-
-  }
-}
 
 TEST_CASE("range is a user-friendly integral loop", "[range]") {
   SECTION("normal 0-based loop") {
