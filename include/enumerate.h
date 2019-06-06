@@ -47,7 +47,7 @@ public:
   iterator end() {
     return iterator(std::end(iterable_), 0);
   }
-  ITERTOOLS_IMPL_MUTABLE_BEGIN_END(enumerate)
+  ITERTOOLS_IMPL_CONST_BEGIN_END(enumerate)
 private:
   wrapped_iterable iterable_;
   enumerate_index_type start_;

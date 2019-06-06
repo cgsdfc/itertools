@@ -59,7 +59,7 @@ public:
   iterator end() {
     return iterator(end_impl(index_sequence()));
   }
-  ITERTOOLS_IMPL_MUTABLE_BEGIN_END(zip)
+  ITERTOOLS_IMPL_CONST_BEGIN_END(zip)
 private:
   wrapped_iterables iterables_;
   template <std::size_t ... Is>
