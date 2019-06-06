@@ -4,7 +4,12 @@ project( itertools CXX )
 set( CMAKE_CXX_STANDARD 17 )
 
 add_library( itertools INTERFACE )
-target_sources( itertools INTERFACE include/itertools.h )
+target_sources( itertools INTERFACE
+                include/itertools.h
+                include/zip.h
+                include/enumerate.h
+                include/range.h
+                include/detail.h )
 target_include_directories( itertools INTERFACE include )
 
 enable_testing()
@@ -30,4 +35,4 @@ target_link_libraries( test_itertools itertools Catch2::Catch2 )
 catch_discover_tests( test_itertools )
 
 #install( TARGETS itertools DESTINATION include )
-install(FILES include/itertools.h DESTINATION include)
+install( FILES include/itertools.h DESTINATION include )
