@@ -1,324 +1,96 @@
-language: cpp
+# version string format -- This will be overwritten later anyway
+version: "{build}"
 
 branches:
   except:
-    - /dev-appveyor.*/
+    - /dev-travis.+/
 
-common_sources: &all_sources
-  - ubuntu-toolchain-r-test
-  - llvm-toolchain-trusty
-  - llvm-toolchain-trusty-3.9
-  - llvm-toolchain-trusty-4.0
-  - llvm-toolchain-trusty-5.0
-  - llvm-toolchain-trusty-6.0
+os:
+  - Visual Studio 2017
+  - Visual Studio 2015
+
+environment:
+  matrix:
+    - additional_flags: "/permissive- /std:c++latest"
+      wmain: 0
+
+    - additional_flags: ""
+      wmain: 0
+
+    - additional_flags: "/D_UNICODE /DUNICODE"
+      wmain: 1
+      coverage: 0
+
+    # Have a coverage dimension
+    - additional_flags: ""
+      wmain: 0
+      coverage: 1
+
+    # Have an examples dimension
+    - additional_flags: ""
+      wmain: 0
+      examples: 1
+
 
 matrix:
-  include:
+  exclude:
+    - os: Visual Studio 2015
+      additional_flags: "/permissive- /std:c++latest"
 
-    # 1/ Linux Clang Builds
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-3.5']
-      env: COMPILER='clang++-3.5'
+    - os: Visual Studio 2015
+      additional_flags: "/D_UNICODE /DUNICODE"
 
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-3.6']
-      env: COMPILER='clang++-3.6'
+    # Exclude unwanted coverage configurations
+    - coverage: 1
+      platform: Win32
 
-    # Clang 3.7 is intentionally skipped as we cannot get it easily on
-    # TravisCI container
+    - coverage: 1
+      os: Visual Studio 2015
 
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['lcov', 'clang-3.8']
-      env: COMPILER='clang++-3.8'
+    - coverage: 1
+      configuration: Release
 
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-3.9']
-      env: COMPILER='clang++-3.9'
+    # Exclude unwanted examples configurations
+    - examples: 1
+      platform: Win32
 
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-4.0']
-      env: COMPILER='clang++-4.0'
+    - examples: 1
+      os: Visual Studio 2015
 
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-5.0']
-      env: COMPILER='clang++-5.0'
+    - examples: 1
+      configuration: Release
 
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-6.0']
-      env: COMPILER='clang++-6.0'
-
-    # 2/ Linux GCC Builds
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['g++-4.8']
-      env: COMPILER='g++-4.8'
-
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['g++-4.9']
-      env: COMPILER='g++-4.9'
-
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['g++-5']
-      env: COMPILER='g++-5'
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc6
-        apt:
-          sources: *all_sources
-          packages: ['g++-6']
-      env: COMPILER='g++-6'
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc7
-        apt:
-          sources: *all_sources
-          packages: ['g++-7']
-      env: COMPILER='g++-7'
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc8
-        apt:
-          sources: *all_sources
-          packages: ['g++-8']
-      env: COMPILER='g++-8'
-
-    # 3b/ Linux C++14 Clang builds
-    # Note that we need newer libstdc++ for C++14 support
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          packages: ['clang-3.8', 'libstdc++-6-dev']
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty
-      env: COMPILER='clang++-3.8' CPP14=1
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-3.9', 'libstdc++-6-dev']
-      env: COMPILER='clang++-3.9' CPP14=1
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-4.0', 'libstdc++-6-dev']
-      env: COMPILER='clang++-4.0' CPP14=1
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-5.0', 'libstdc++-6-dev']
-      env: COMPILER='clang++-5.0' CPP14=1
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-6.0', 'libstdc++-6-dev']
-      env: COMPILER='clang++-6.0' CPP14=1
-
-
-    # 4a/ Linux C++14 GCC builds
-    - os: linux
-      compiler: gcc
-      addons: *gcc6
-      env: COMPILER='g++-6' CPP14=1
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc7
-      env: COMPILER='g++-7' CPP14=1
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc8
-      env: COMPILER='g++-8' CPP14=1
-
-    # 5/ OSX Clang Builds
-    - os: osx
-      osx_image: xcode7.3
-      compiler: clang
-      env: COMPILER='clang++'
-
-    - os: osx
-      osx_image: xcode8
-      compiler: clang
-      env: COMPILER='clang++'
-
-    - os: osx
-      osx_image: xcode9
-      compiler: clang
-      env: COMPILER='clang++'
-
-    - os: osx
-      osx_image: xcode9.1
-      compiler: clang
-      env: COMPILER='clang++'
-
-    - os: osx
-      osx_image: xcode9.1
-      compiler: clang
-      env: COMPILER='clang++' CPP14=1
-
-    # 6/ Special builds -- examples, coverage, valgrind, etc.
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['lcov', 'g++-7']
-      env: COMPILER='g++-7' CPP14=1 EXAMPLES=1 COVERAGE=1 EXTRAS=1
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          packages: ['clang-3.8', 'lcov']
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty
-      env: COMPILER='clang++-3.8' EXAMPLES=1 COVERAGE=1 EXTRAS=1
-
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['valgrind', 'lcov', 'g++-7']
-      env: COMPILER='g++-7' CPP14=1 VALGRIND=1
-
-    - os: osx
-      osx_image: xcode9.1
-      compiler: clang
-      env: COMPILER='clang++' CPP14=1 EXAMPLES=1 COVERAGE=1 EXTRAS=1
-
-    # 7/ C++17 builds
-    - os: linux
-      compiler: gcc
-      addons: *gcc7
-      env: COMPILER='g++-7' CPP17=1
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc7
-      env: COMPILER='g++-7' EXAMPLES=1 COVERAGE=1 EXTRAS=1 CPP17=1
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-6.0', 'libstdc++-8-dev']
-      env: COMPILER='clang++-6.0' CPP17=1
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['clang-6.0', 'libstdc++-8-dev']
-      env: COMPILER='clang++-6.0' CPP17=1 EXAMPLES=1 COVERAGE=1 EXTRAS=1
-
-    # 8/ Conan
-    - language: python
-      python:
-        - "3.7"
-      dist: xenial
-      install:
-        - pip install conan==1.10.2 conan-package-tools
-      env:
-        - CONAN_GCC_VERSIONS=8
-        - CONAN_DOCKER_IMAGE=conanio/gcc8
-      script:
-        - python .conan/build.py
 
 install:
-  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
-  - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      CMAKE_URL="http://cmake.org/files/v3.8/cmake-3.8.2-Linux-x86_64.tar.gz"
-      mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-      export PATH=${DEPS_DIR}/cmake/bin:${PATH}
-    elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-        which cmake || brew install cmake;
-    fi
+  - ps: if (($env:CONFIGURATION) -eq "Debug" -And ($env:coverage) -eq "1" ) { python -m pip --disable-pip-version-check install codecov }
+  - ps: if (($env:CONFIGURATION) -eq "Debug" -And ($env:coverage) -eq "1" ) { .\misc\installOpenCppCoverage.ps1 }
 
-before_script:
-  - export CXX=${COMPILER}
-  - cd ${TRAVIS_BUILD_DIR}
-  # Regenerate single header file, so it is tested in the examples...
-  - python scripts/generateSingleHeader.py
+# Win32 and x64 are CMake-compatible solution platform names.
+# This allows us to pass %PLATFORM% to CMake -A.
+platform:
+  - Win32
+  - x64
 
-  # Use Debug builds for running Valgrind and building examples
-  - cmake -H. -BBuild-Debug -DCMAKE_BUILD_TYPE=Debug -Wdev -DUSE_CPP14=${CPP14} -DUSE_CPP17=${CPP17} -DCATCH_USE_VALGRIND=${VALGRIND} -DCATCH_BUILD_EXAMPLES=${EXAMPLES} -DCATCH_ENABLE_COVERAGE=${COVERAGE} -DCATCH_BUILD_EXTRA_TESTS=${EXTRAS}
-  # Don't bother with release build for coverage build
-  - cmake -H. -BBuild-Release -DCMAKE_BUILD_TYPE=Release -Wdev -DUSE_CPP14=${CPP14} -DUSE_CPP17=${CPP17}
+# build Configurations, i.e. Debug, Release, etc.
+configuration:
+  - Debug
+  - Release
+
+#Cmake will autodetect the compiler, but we set the arch
+before_build:
+  - set CXXFLAGS=%additional_flags%
+  # Indirection because appveyor doesn't handle multiline batch scripts properly
+  # https://stackoverflow.com/questions/37627248/how-to-split-a-command-over-multiple-lines-in-appveyor-yml/37647169#37647169
+  # https://help.appveyor.com/discussions/questions/3888-multi-line-cmd-or-powershell-warning-ignore
+#  - cmd: .\misc\appveyorBuildConfigurationScript.bat
 
 
-script:
-  - cd Build-Debug
-  - make -j 2
-  - CTEST_OUTPUT_ON_FAILURE=1 ctest -j 2
-  # Coverage collection does not work for OS X atm
-  - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]] && [[ "${COVERAGE}" == "1" ]]; then
-      make gcov
-      make lcov
-      bash <(curl -s https://codecov.io/bash) -X gcov || echo "Codecov did not collect coverage reports"
-    fi
-  - # Go to release build
-  - cd ../Build-Release
-  - make -j 2
-  - CTEST_OUTPUT_ON_FAILURE=1 ctest -j 2
+# build with MSBuild
+build:
+  project: Build\itertools.sln             # path to Visual Studio solution or project
+  parallel: true                        # enable MSBuild parallel builds
+  verbosity: normal                     # MSBuild verbosity level {quiet|minimal|normal|detailed}
+
+test_script:
+  - set CTEST_OUTPUT_ON_FAILURE=1
+#  - cmd: .\misc\appveyorTestRunScript.bat
