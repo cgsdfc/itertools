@@ -70,7 +70,7 @@ install:
 # This allows us to pass %PLATFORM% to CMake -A.
 platform:
   - Win32
-  - x64
+#  - x64
 
 # build Configurations, i.e. Debug, Release, etc.
 configuration:
@@ -84,8 +84,13 @@ before_build:
   # https://stackoverflow.com/questions/37627248/how-to-split-a-command-over-multiple-lines-in-appveyor-yml/37647169#37647169
   # https://help.appveyor.com/discussions/questions/3888-multi-line-cmd-or-powershell-warning-ignore
   - cmd: pip.exe install conan
+  - cmd: conan remote add bintray https://api.bintray.com/conan/uilianries/conan
+  - cmd: conan install -r bintray Catch/1.9.6@uilianries/stable
   - cmd: cd itertools
-  - cmd: conan install .
+  - cmd: mkdir Build
+  - cmd: cd Build
+  - cmd: conan install ..
+  - cmd: .\misc\appveyorBuildConfigurationScript.bat
 
 
 

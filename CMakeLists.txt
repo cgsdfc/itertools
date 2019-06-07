@@ -3,13 +3,17 @@ project( itertools CXX )
 
 set( CMAKE_CXX_STANDARD 17 )
 
+# Setup conan and include everything.
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 add_library( itertools INTERFACE )
-target_sources( itertools INTERFACE
-                include/itertools.h
-                include/itertools/zip.h
-                include/itertools/enumerate.h
-                include/itertools/range.h
-                include/itertools/detail.h )
+#target_sources( itertools INTERFACE
+#                include/itertools.h
+#                include/itertools/zip.h
+#                include/itertools/enumerate.h
+#                include/itertools/range.h
+#                include/itertools/detail.h )
 target_include_directories( itertools INTERFACE include )
 
 enable_testing()

@@ -38,7 +38,6 @@ TEST_CASE("map a single iterable", "[map]") {
 
   SECTION("rvalue of vector") {
     // vector has no such issue.
-    printf("");
     auto m = map(sqrt, std::vector{1, 2, 3});
     for (auto v:m) {
       printf("%lf\n", v);
