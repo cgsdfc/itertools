@@ -7,29 +7,29 @@ branches:
 
 os:
   - Visual Studio 2017
-  - Visual Studio 2015
+#  - Visual Studio 2015
 
 environment:
   matrix:
     - additional_flags: "/permissive- /std:c++latest"
       wmain: 0
 
-    - additional_flags: ""
-      wmain: 0
-
-    - additional_flags: "/D_UNICODE /DUNICODE"
-      wmain: 1
-      coverage: 0
-
-    # Have a coverage dimension
-    - additional_flags: ""
-      wmain: 0
-      coverage: 1
-
-    # Have an examples dimension
-    - additional_flags: ""
-      wmain: 0
-      examples: 1
+#    - additional_flags: ""
+#      wmain: 0
+#
+#    - additional_flags: "/D_UNICODE /DUNICODE"
+#      wmain: 1
+#      coverage: 0
+#
+#    # Have a coverage dimension
+#    - additional_flags: ""
+#      wmain: 0
+#      coverage: 1
+#
+#    # Have an examples dimension
+#    - additional_flags: ""
+#      wmain: 0
+#      examples: 1
 
 
 matrix:
@@ -84,7 +84,7 @@ before_build:
   # https://stackoverflow.com/questions/37627248/how-to-split-a-command-over-multiple-lines-in-appveyor-yml/37647169#37647169
   # https://help.appveyor.com/discussions/questions/3888-multi-line-cmd-or-powershell-warning-ignore
   - cmd: .\misc\appveyorBuildConfigurationScript.bat
-  - cmd: .\misc\installCatch2.sh
+  - cmd: .\misc\installCatch2.bat
 
 
 
