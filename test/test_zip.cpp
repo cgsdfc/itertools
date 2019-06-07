@@ -29,8 +29,8 @@ TEST_CASE("all wrapped iterable is rvalue", "[zip]") {
 TEST_CASE("mixed lvalue and rvalue", "[zip]") {
   std::string s{"Hello"};
   auto zp = zip(s, std::string(s));
-  for (auto[ch, num]: zip(s, (int[]) {1, 2, 3, 4, 5})) {
-    printf("%c, %d\n", ch, num);
+  for (auto[ch, ch2]: zp) {
+    printf("%c, %c\n", ch, ch2);
   }
 }
 

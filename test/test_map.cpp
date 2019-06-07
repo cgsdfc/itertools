@@ -10,32 +10,7 @@
 #include "itertools/map.h"
 using itertools::map;
 
-struct rvalue_wrapper1 {
-  int (&&t)[2];
-};
-
-struct rvalue_wrapper2 {
-  rvalue_wrapper1 t;
-};
-
-TEST_CASE("nested rvalue member") {
-  rvalue_wrapper2 w2{(int[]) {1, 2}};
-  printf("%d\n", w2.t.t[0]);
-
-}
-
 TEST_CASE("map a single iterable", "[map]") {
-
-  SECTION("rvalue of array") {
-    // There is a known bug: when optimization is on, the temporary array
-    // will become garbage.
-    // avoid using temporary array!!
-    auto m = map(sqrt, (int[]) {1, 2, 3});
-    for (auto v:m) {
-      printf("%lf\n", v);
-    }
-  }
-
   SECTION("rvalue of vector") {
     // vector has no such issue.
     auto m = map(sqrt, std::vector{1, 2, 3});

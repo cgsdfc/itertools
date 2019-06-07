@@ -22,7 +22,7 @@ struct iterable_wrapper<T &&> {
 };
 template <class T, std::size_t N>
 struct iterable_wrapper<T (&&)[N]> {
-  using type = T (&&)[N];
+  using type = typename T::rvalue_reference_to_array_is_not_supported;
 };
 template <class T>
 struct iterator_from_iterable {

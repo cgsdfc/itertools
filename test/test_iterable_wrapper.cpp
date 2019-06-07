@@ -38,11 +38,6 @@ TEST_CASE("", "[WrapperBase][rvalue]") {
     WrapperBase wb{decltype(vec)(vec)};
     REQUIRE(wb.wrapped == vec);
   }
-  SECTION("array") {
-    WrapperBase wb{(int[]) {1, 2}};
-    REQUIRE(std::memcmp(&wb.wrapped[0], &arr[0], sizeof(arr)) == 0);
-    printf("%lu\n", sizeof(wb.wrapped));
-  }
 }
 
 TEST_CASE("", "[WrapperBase][lvalue]") {
