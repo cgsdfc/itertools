@@ -64,7 +64,6 @@ matrix:
 install:
   - ps: if (($env:CONFIGURATION) -eq "Debug" -And ($env:coverage) -eq "1" ) { python -m pip --disable-pip-version-check install codecov }
   - ps: if (($env:CONFIGURATION) -eq "Debug" -And ($env:coverage) -eq "1" ) { .\misc\installOpenCppCoverage.ps1 }
-  - bash: misc\installCatch2.sh
 
 
 # Win32 and x64 are CMake-compatible solution platform names.
@@ -85,6 +84,8 @@ before_build:
   # https://stackoverflow.com/questions/37627248/how-to-split-a-command-over-multiple-lines-in-appveyor-yml/37647169#37647169
   # https://help.appveyor.com/discussions/questions/3888-multi-line-cmd-or-powershell-warning-ignore
   - cmd: .\misc\appveyorBuildConfigurationScript.bat
+  - cmd: .\misc\installCatch2.sh
+
 
 
 # build with MSBuild
