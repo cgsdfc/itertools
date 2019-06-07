@@ -276,7 +276,7 @@ matrix:
         - "3.7"
       dist: xenial
       install:
-        - pip install conan==1.10.2 conan-package-tools
+        - pip install conan==1.10.2 conan-package-tools --user
       env:
         - CONAN_GCC_VERSIONS=8
         - CONAN_DOCKER_IMAGE=conanio/gcc8
@@ -298,7 +298,7 @@ install:
 before_script:
   - export CXX=${COMPILER}
   - cd ${TRAVIS_BUILD_DIR}
-  - pip install conan
+  - pip install conan --user
   - mkdir Build-Debug
   - $(cd Build-Debug && conan install ..)
   - mkdir Build-Release
