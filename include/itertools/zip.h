@@ -33,7 +33,7 @@ public:
       inc_all(index_sequence());
       return *this;
     }
-    ITERTOOLS_IMPL_NEQ(iterator)
+    ITERTOOLS_IMPL_NEQ_POST_INC(iterator)
   private:
     template <std::size_t ... Is>
     bool compare(const iterator &that, std::index_sequence<Is...>) const {

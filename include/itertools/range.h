@@ -27,7 +27,7 @@ public:
     bool operator==(const iterator &that) const {
       return cur_ == that.cur_;
     }
-    ITERTOOLS_IMPL_NEQ(iterator)
+    ITERTOOLS_IMPL_NEQ_POST_INC(iterator)
     iterator &operator++() {
       ++cur_;
     }
@@ -77,14 +77,8 @@ struct range_integer {
   using type = typename std::make_signed<common_type>::type;
 };
 
-template <class I1, class I2, class I3>
-range(I1, I2, I3) -> range<typename range_integer<I1, I2, I3>::type>;
-
-template <class I1, class I2>
-range(I1, I2) -> range<typename range_integer<I1, I2>::type>;
-
-template <class I1>
-range(I1) -> range<typename range_integer<I1>::type>;
+template <class ... Integers>
+range(Integers...) -> range<typename range_integer<Integers...>::type>;
 
 }
 #endif //ITERTOOLS_RANGE_H

@@ -13,10 +13,15 @@
     return const_cast<type_name *>(this)->end();\
   }
 
-#define ITERTOOLS_IMPL_NEQ(type_name) \
+#define ITERTOOLS_IMPL_NEQ_POST_INC(type_name) \
   bool operator!=(const type_name &that) const { \
     return !operator==(that); \
   } \
+  const type_name operator++(int) { \
+    auto tmp = *this; \
+    operator++(); \
+    return tmp; \
+  }
 
 
 #endif //ITERTOOLS_MACROS_H

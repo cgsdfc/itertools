@@ -32,7 +32,7 @@ public:
     iterator &operator++() {
       ++args_;
     }
-    ITERTOOLS_IMPL_NEQ(iterator)
+    ITERTOOLS_IMPL_NEQ_POST_INC(iterator)
   };
   explicit map(Callable func, Iterables &&... iterables)
       : func_(std::move(func)), iterable_(std::forward<Iterables>(iterables)...) {}

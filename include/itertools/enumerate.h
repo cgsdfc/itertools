@@ -33,7 +33,7 @@ public:
     value_type operator*() const {
       return {start_, *iter_};
     }
-    ITERTOOLS_IMPL_NEQ(iterator)
+    ITERTOOLS_IMPL_NEQ_POST_INC(iterator)
   };
 
   explicit enumerate(Iterable &&iterable, enumerate_index_type start = 0)

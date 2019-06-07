@@ -68,25 +68,30 @@ TEST_CASE("common types of integrals", "[util]") {
 }
 
 TEST_CASE("range with different integer type", "[range]") {
-  SECTION("2 case") {
+  SECTION("start stop") {
     std::vector<int> v(2, 6);
     auto r = range(0, v.size());
-    for (auto i : r) {
-      printf("%ld\n", i);
-    }
+    auto iter = std::begin(r);
+    REQUIRE(*iter++ == 0);
+    REQUIRE(*iter++ == 1);
+    REQUIRE(iter == r.end());
   }
-  SECTION("3 case") {
+
+  SECTION("start stop step") {
     std::vector<int> v(2, 6);
     auto r = range(0, v.size(), 2);
-    for (auto i : r) {
-      printf("%ld\n", i);
-    }
+    auto iter = r.begin();
+    REQUIRE(*iter++ == 0);
+    REQUIRE(iter == r.end());
   }
-  SECTION("3 case with negative step") {
+
+  SECTION("negative step") {
     std::vector<int> v(2, 6);
     auto r = range(v.size() - 1, -1, -1);
-    for (auto i : r) {
-      printf("%ld\n", i);
-    }
+    auto iter = r.begin();
+    REQUIRE(*iter++ == 1);
+    REQUIRE(*iter++ == 0);
+    REQUIRE(iter == r.end());
   }
+
 }
