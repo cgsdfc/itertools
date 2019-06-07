@@ -54,10 +54,10 @@ public:
   explicit zip(Iterables &&...iterables) : iterables_(std::forward<Iterables>(iterables)...) {}
 
   iterator begin() {
-    return iterator(begin_impl(index_sequence()));
+    return begin_impl(index_sequence());
   }
   iterator end() {
-    return iterator(end_impl(index_sequence()));
+    return end_impl(index_sequence());
   }
   ITERTOOLS_IMPL_CONST_BEGIN_END(zip)
 private:
