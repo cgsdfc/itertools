@@ -83,8 +83,9 @@ before_build:
   # Indirection because appveyor doesn't handle multiline batch scripts properly
   # https://stackoverflow.com/questions/37627248/how-to-split-a-command-over-multiple-lines-in-appveyor-yml/37647169#37647169
   # https://help.appveyor.com/discussions/questions/3888-multi-line-cmd-or-powershell-warning-ignore
-  - cmd: .\misc\installCatch2.bat
-  - cmd: .\misc\appveyorBuildConfigurationScript.bat
+  - cmd: pip.exe install conan
+  - cmd: cd itertools
+  - cmd: conan install .
 
 
 

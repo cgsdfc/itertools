@@ -1,0 +1,6 @@
+[requires]
+Catch/1.9.6@uilianries/stable
+
+[generators]
+txt
+cmake
