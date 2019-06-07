@@ -17,10 +17,8 @@ struct WrapperBase {
 };
 
 template <class T>
-WrapperBase(T &&) -> WrapperBase<typename std::remove_reference<T>::type &&>;
+WrapperBase(T &&) -> WrapperBase<T &&>;
 
-template <class T>
-WrapperBase(T &) -> WrapperBase<typename std::remove_reference<T>::type &>;
 struct RValueRefWrapper {
   std::vector<int> &&t;
 };

@@ -7,12 +7,11 @@
 #include <iterator>
 #include <type_traits>
 #include <initializer_list>
+#include <array>
 
 namespace itertools {
 template <class T>
-struct iterable_wrapper {
-  using type = T;
-};
+struct iterable_wrapper;
 template <class T>
 struct iterable_wrapper<T &> {
   using type = T &;
