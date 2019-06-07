@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/cgsdfc/itertools.svg?branch=master)](https://travis-ci.org/cgsdfc/itertools)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/cgsdfc/itertools?svg=true)](https://ci.appveyor.com/project/cgsdfc/itertools)
+
 # Itertools
 Python's builtin iterators & itertools in modern C++.
 Get back all the goodness you miss in Python when typing C++ code!
