@@ -22,7 +22,7 @@ set( CMAKE_MODULE_PATH "${CONAN_LIB_DIRS_CATCH2}/cmake/Catch2" )
 include( CTest )
 include( Catch )
 
-if( WIN32 )
+if( MSVC )
   add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
 endif()
 
