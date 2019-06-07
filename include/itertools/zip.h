@@ -26,9 +26,6 @@ public:
       // any of these iterators equal.
       return compare(that, index_sequence());
     }
-    bool operator!=(const iterator &that) const {
-      return !operator==(that);
-    }
     value_type operator*() const {
       return star_all(index_sequence());
     }
@@ -36,6 +33,7 @@ public:
       inc_all(index_sequence());
       return *this;
     }
+    ITERTOOLS_IMPL_NEQ(iterator)
   private:
     template <std::size_t ... Is>
     bool compare(const iterator &that, std::index_sequence<Is...>) const {

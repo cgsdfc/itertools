@@ -25,9 +25,6 @@ public:
     bool operator==(const iterator &that) const {
       return iter_ == that.iter_;
     }
-    bool operator!=(const iterator &that) const {
-      return !operator==(that);
-    }
     iterator &operator++() {
       ++iter_;
       ++start_;
@@ -36,6 +33,7 @@ public:
     value_type operator*() const {
       return {start_, *iter_};
     }
+    ITERTOOLS_IMPL_NEQ(iterator)
   };
 
   explicit enumerate(Iterable &&iterable, enumerate_index_type start = 0)

@@ -27,9 +27,7 @@ public:
     bool operator==(const iterator &that) const {
       return cur_ == that.cur_;
     }
-    bool operator!=(const iterator &that) const {
-      return !(that == *this);
-    }
+    ITERTOOLS_IMPL_NEQ(iterator)
     iterator &operator++() {
       ++cur_;
     }

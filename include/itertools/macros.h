@@ -13,4 +13,10 @@
     return const_cast<type_name *>(this)->end();\
   }
 
+#define ITERTOOLS_IMPL_NEQ(type_name) \
+  bool operator!=(const type_name &that) const { \
+    return !operator==(that); \
+  } \
+
+
 #endif //ITERTOOLS_MACROS_H
