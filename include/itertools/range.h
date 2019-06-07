@@ -27,10 +27,11 @@ public:
     bool operator==(const iterator &that) const {
       return cur_ == that.cur_;
     }
-    ITERTOOLS_IMPL_NEQ_POST_INC(iterator)
     iterator &operator++() {
       ++cur_;
+      return *this;
     }
+    ITERTOOLS_IMPL_NEQ_POST_INC(iterator)
   };
 
 public:

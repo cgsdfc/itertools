@@ -31,16 +31,17 @@ public:
     }
     iterator &operator++() {
       ++args_;
+      return *this;
     }
     ITERTOOLS_IMPL_NEQ_POST_INC(iterator)
   };
   explicit map(Callable func, Iterables &&... iterables)
       : func_(std::move(func)), iterable_(std::forward<Iterables>(iterables)...) {}
   iterator begin() {
-    return iterator(func_, std::begin(iterable_));
+    return iterator(func_, iterable_.begin());
   }
   iterator end() {
-    return iterator(func_, std::end(iterable_));
+    return iterator(func_, iterable_.end());
   }
   ITERTOOLS_IMPL_CONST_BEGIN_END(map)
 private:
