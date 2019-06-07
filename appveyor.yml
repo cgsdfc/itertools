@@ -14,22 +14,22 @@ environment:
     - additional_flags: "/permissive- /std:c++latest"
       wmain: 0
 
-#    - additional_flags: ""
-#      wmain: 0
-#
-#    - additional_flags: "/D_UNICODE /DUNICODE"
-#      wmain: 1
-#      coverage: 0
-#
+    - additional_flags: ""
+      wmain: 0
+
+    - additional_flags: "/D_UNICODE /DUNICODE"
+      wmain: 1
+      coverage: 0
+
     # Have a coverage dimension
     - additional_flags: ""
       wmain: 0
       coverage: 1
-#
-#    # Have an examples dimension
-#    - additional_flags: ""
-#      wmain: 0
-#      examples: 1
+
+    # Have an examples dimension
+    - additional_flags: ""
+      wmain: 0
+      examples: 1
 
 
 matrix:
