@@ -4,39 +4,52 @@
 
 #ifndef ITERTOOLS_MAP_H
 #define ITERTOOLS_MAP_H
+#include <tuple>
 #include "detail.h"
+#include "zip.h"
 
 namespace itertools {
-template <class Callable, class ... Iterators>
-using map_value_type = std::invoke_result_t<Callable, typename std::iterator_traits<Iterators>::value_type ...>;
-
-template <class Callable, class ... Iterators>
-class map_iterator : public std::iterator<std::forward_iterator_tag, map_value_type<Callable, Iterators...>> {
-  Callable func_;
-  zip_iterator<Iterators...> args_;
-public:
-  using value_type = map_value_type<Callable, Iterators...>;
-  explicit map_iterator(Callable func, Iterators ... iterators) : func_(func), args_(iterators...) {}
-  bool operator==(const map_iterator &rhs) const {
-    return args_ == rhs.args_;
-  }
-  bool operator!=(const map_iterator &rhs) const {
-    return !(rhs == *this);
-  }
-  map_iterator &operator++() {
-    ++args_;
-    return *this;
-  }
-  value_type operator*() const {
-    auto &&arg_tuple = *args_;
-    return std::apply(func_, arg_tuple);
-  }
-};
 
 template <class Callable, class ... Iterables>
 class map {
 public:
+  using value_type = typename std::invoke_result<Callable,
+                                                 typename iterable_traits<Iterables>::deref_value_type...>::type;
+  using wrapped_iterable = zip<Iterables...>;
+  using raw_iterator = typename wrapped_iterable::iterator;
 
+  class iterator : public std::iterator<std::forward_iterator_tag, value_type> {
+    Callable func_;
+    raw_iterator args_;
+  public:
+    iterator(Callable func, raw_iterator args) : func_(std::move(func)), args_(std::move(args)) {}
+    bool operator==(const iterator &that) const {
+      return args_ == that.args_;
+    }
+    value_type operator*() const {
+      return std::apply(func_, *args_);
+    }
+    iterator &operator++() {
+      ++args_;
+    }
+    ITERTOOLS_IMPL_NEQ(iterator)
+  };
+  explicit map(Callable func, Iterables &&... iterables)
+      : func_(std::move(func)), iterable_(std::forward<Iterables>(iterables)...) {}
+  iterator begin() {
+    return iterator(func_, std::begin(iterable_));
+  }
+  iterator end() {
+    return iterator(func_, std::end(iterable_));
+  }
+  ITERTOOLS_IMPL_CONST_BEGIN_END(map)
+private:
+  Callable func_;
+  wrapped_iterable iterable_;
 };
+
+template <class Callable, class ... Iterables>
+map(Callable, Iterables &&...) -> map<Callable, Iterables && ...>;
+
 }
 #endif //ITERTOOLS_MAP_H
