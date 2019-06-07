@@ -298,11 +298,9 @@ install:
 before_script:
   - export CXX=${COMPILER}
   - cd ${TRAVIS_BUILD_DIR}
-  # Regenerate single header file, so it is tested in the examples...
-  - python scripts/generateSingleHeader.py
 
   # Use Debug builds for running Valgrind and building examples
-  - cmake -H. -BBuild-Debug -DCMAKE_BUILD_TYPE=Debug -Wdev -DUSE_CPP14=${CPP14} -DUSE_CPP17=${CPP17} -DCATCH_USE_VALGRIND=${VALGRIND} -DCATCH_BUILD_EXAMPLES=${EXAMPLES} -DCATCH_ENABLE_COVERAGE=${COVERAGE} -DCATCH_BUILD_EXTRA_TESTS=${EXTRAS}
+  - cmake -H. -BBuild-Debug -DCMAKE_BUILD_TYPE=Debug -Wdev -DUSE_CPP14=${CPP14} -DUSE_CPP17=${CPP17} -DITERTOOLS_USE_VALGRIND=${VALGRIND} -DITERTOOLS_BUILD_EXAMPLES=${EXAMPLES} -DITERTOOLS_ENABLE_COVERAGE=${COVERAGE} -DITERTOOLS_BUILD_EXTRA_TESTS=${EXTRAS}
   # Don't bother with release build for coverage build
   - cmake -H. -BBuild-Release -DCMAKE_BUILD_TYPE=Release -Wdev -DUSE_CPP14=${CPP14} -DUSE_CPP17=${CPP17}
 
@@ -318,7 +316,7 @@ script:
       make lcov
       bash <(curl -s https://codecov.io/bash) -X gcov || echo "Codecov did not collect coverage reports"
     fi
-  - # Go to release build
+  # Go to release build
   - cd ../Build-Release
   - make -j 2
   - CTEST_OUTPUT_ON_FAILURE=1 ctest -j 2
