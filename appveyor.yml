@@ -86,7 +86,6 @@ before_build:
   - cmd: pip.exe install conan
   - cmd: conan remote add bintray https://api.bintray.com/conan/uilianries/conan
   - cmd: conan install -r bintray Catch/1.9.6@uilianries/stable
-  - cmd: cd itertools
   - cmd: mkdir Build
   - cmd: cd Build
   - cmd: conan install ..

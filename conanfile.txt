@@ -1,5 +1,5 @@
 [requires]
-Catch/1.9.6@uilianries/stable
+Catch2/2.8.0@catchorg/stable
 
 [generators]
 txt
