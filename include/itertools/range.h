@@ -11,15 +11,15 @@ namespace itertools {
 
 template <class Integer>
 class range {
-  static_assert(std::is_integral_v<Integer>, "range_iterator must handle integer");
+  static_assert(std::is_integral_v<Integer>, "range must handle integer");
 public:
   using value_type = Integer;
   class iterator : public std::iterator<std::forward_iterator_tag, value_type> {
     std::size_t cur_ = 0;
-    Integer start_;
-    Integer step_;
+    value_type start_;
+    value_type step_;
   public:
-    iterator(std::size_t cur, Integer start, Integer step)
+    iterator(std::size_t cur, value_type start, value_type step)
         : cur_(cur), start_(start), step_(step) {}
     value_type operator*() const {
       return start_ + cur_ * step_;
@@ -34,9 +34,9 @@ public:
   };
 
 public:
-  explicit range(Integer stop) : range(0, stop, 1) {}
-  range(Integer start, Integer stop) : range(start, stop, 1) {}
-  range(Integer start, Integer stop, Integer step)
+  explicit range(value_type stop) : range(0, stop, 1) {}
+  range(value_type start, value_type stop) : range(start, stop, 1) {}
+  range(value_type start, value_type stop, value_type step)
       : start_(start), step_(step) {
     length_ = compute_length(stop);
   }
@@ -49,12 +49,12 @@ public:
   }
   ITERTOOLS_IMPL_CONST_BEGIN_END(range)
 private:
-  Integer start_ = 0;
-  Integer step_ = 1;
+  value_type start_ = 0;
+  value_type step_ = 1;
   std::size_t length_ = 0;
 
-  std::size_t compute_length(Integer stop) const {
-    Integer low, high;
+  std::size_t compute_length(value_type stop) const {
+    value_type low, high;
     std::size_t pos_step;
     if (step_ > 0) {
       low = start_;
@@ -70,5 +70,21 @@ private:
     return ((high - low - 1) / pos_step) + 1;
   }
 };
+
+template <class ... Integers>
+struct range_integer {
+  using common_type = typename std::common_type<Integers...>::type;
+  using type = typename std::make_signed<common_type>::type;
+};
+
+template <class I1, class I2, class I3>
+range(I1, I2, I3) -> range<typename range_integer<I1, I2, I3>::type>;
+
+template <class I1, class I2>
+range(I1, I2) -> range<typename range_integer<I1, I2>::type>;
+
+template <class I1>
+range(I1) -> range<typename range_integer<I1>::type>;
+
 }
 #endif //ITERTOOLS_RANGE_H
