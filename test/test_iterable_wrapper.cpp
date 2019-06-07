@@ -19,17 +19,6 @@ struct WrapperBase {
 template <class T>
 WrapperBase(T &&) -> WrapperBase<T &&>;
 
-struct RValueRefWrapper {
-  std::vector<int> &&t;
-};
-
-TEST_CASE("rvalue ref as member should expand object's life time") {
-  RValueRefWrapper w{std::vector{1, 2, 3}};
-  REQUIRE(w.t == std::vector{1, 2, 3});
-  w.t[0] = 2;
-  REQUIRE(w.t[0] == 2);
-}
-
 TEST_CASE("", "[WrapperBase][rvalue]") {
   int arr[] = {1, 2};
   std::vector vec{1, 2, 3};
