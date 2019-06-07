@@ -29,8 +29,7 @@ target_sources( test_itertools PRIVATE
                 test/test_enumerate.cpp
                 test/test_zip.cpp
                 test/test_range.cpp
-                test/test_map.cpp
-                test/test_itertools.cpp )
+                test/test_map.cpp )
 target_link_libraries( test_itertools itertools Catch2::Catch2 )
 
 # automatically install tests.

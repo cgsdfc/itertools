@@ -11,12 +11,14 @@
 using itertools::map;
 
 TEST_CASE("map a single iterable", "[map]") {
+
   SECTION("rvalue") {
     auto m = map(sqrt, (int[]) {1, 2, 3});
     for (auto v:m) {
       printf("%lf\n", v);
     }
   }
+
   SECTION("lvalue") {
     std::vector vec{1, 2, 3};
     auto cnt = 1;
@@ -31,6 +33,13 @@ TEST_CASE("map a single iterable", "[map]") {
     std::string out;
     std::copy(m.begin(), m.end(), std::back_inserter(out));
     REQUIRE(out == "HELLO");
+  }
+  SECTION("map a C array") {
+    int arr[] = {1, 2, 3};
+    for (auto i : map([](auto x) { return x * 2; }, arr)) {
+      std::cout << i << ' ';
+    }
+    std::cout << '\n';
   }
 }
 
