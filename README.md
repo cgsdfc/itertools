@@ -73,6 +73,22 @@ This just looks much cleaner and indeed more efficient.
 Your last resistance to the index-based loop will be the `range` class, which implements the index-based loop but
 provide you the range-based interface. Think about saying goodbye to the plain old index loop!
 ```cpp
-std::vector<int> v;
-for (auto i : range(0, v.size(), 
+std::vector<int> v{1, 2, 3, 4};
+for (auto i : range(0, v.size()) {
+    printf("%d\n", v[i]);
+}
+
+// reverse
+for (auto i : range(v.size() - 1, -1, -1)) {
+    printf("%d\n", v[i]);
+}
 ```
+
+# Install
+```bash
+cd itertools && mkdir build && cd build
+make && make install
+```
+
+# License
+MIT License

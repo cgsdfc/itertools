@@ -30,7 +30,6 @@ TEST_CASE("map a single iterable", "[map]") {
     // There is a known bug: when optimization is on, the temporary array
     // will become garbage.
     // avoid using temporary array!!
-    printf("");
     auto m = map(sqrt, (int[]) {1, 2, 3});
     for (auto v:m) {
       printf("%lf\n", v);
