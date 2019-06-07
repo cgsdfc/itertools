@@ -89,6 +89,7 @@ before_build:
   - cmd: mkdir Build
   - cmd: cd Build
   - cmd: conan install ..
+  - cmd: cd ..
   - cmd: .\misc\appveyorBuildConfigurationScript.bat
 
 
