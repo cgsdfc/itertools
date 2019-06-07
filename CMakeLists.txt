@@ -8,12 +8,6 @@ include( ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake )
 conan_basic_setup()
 
 add_library( itertools INTERFACE )
-#target_sources( itertools INTERFACE
-#                include/itertools.h
-#                include/itertools/zip.h
-#                include/itertools/enumerate.h
-#                include/itertools/range.h
-#                include/itertools/detail.h )
 target_include_directories( itertools INTERFACE include )
 
 enable_testing()
@@ -22,6 +16,9 @@ enable_testing()
 find_package( Catch2 REQUIRED )
 
 # include necessary cmake modules.
+message(STATUS ${CONAN_LIB_DIRS_CATCH2})
+# fix the error of cmake module path.
+set( CMAKE_MODULE_PATH "${CONAN_LIB_DIRS_CATCH2}/cmake/Catch2" )
 include( CTest )
 include( Catch )
 
