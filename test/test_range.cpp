@@ -95,3 +95,17 @@ TEST_CASE("range with different integer type", "[range]") {
   }
 
 }
+
+TEST_CASE("combination of operator++ and operator*", "[range]") {
+  auto r = range(5);
+  auto iter = r.begin();
+  REQUIRE(*iter == 0);
+  ++iter;
+  REQUIRE(*iter == 1);
+  iter++;
+  REQUIRE(*iter == 2);
+  REQUIRE(*iter++ == 2);
+  REQUIRE(*iter == 3);
+  REQUIRE(*++iter == 4);
+
+}

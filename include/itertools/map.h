@@ -62,7 +62,7 @@ public:
     raw_iterator arg_;
   public:
     iterator(Callable func, raw_iterator arg) : func_(std::move(func)), arg_(std::move(arg)) {}
-    value_type operator*() {
+    value_type operator*() const {
       return func_(*arg_);
     }
     bool operator==(const iterator &that) const {

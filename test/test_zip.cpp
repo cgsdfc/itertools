@@ -70,3 +70,12 @@ TEST_CASE("zip one or more iterable", "[zip]") {
     REQUIRE(cnt == shortest_seq.size());
   }
 }
+
+TEST_CASE("++ and *", "[zip][operator]") {
+  auto z = zip(std::string{"World"});
+  auto iter = z.begin();
+  REQUIRE(*iter == std::tuple{'W'});
+  REQUIRE(*++iter == std::tuple{'o'});
+  REQUIRE(*iter++ == std::tuple{'o'});
+  REQUIRE(*iter == std::tuple{'r'});
+}

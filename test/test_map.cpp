@@ -83,3 +83,17 @@ TEST_CASE("map a range", "[map][range]") {
     std::cout << val << '\n';
   }
 }
+
+TEST_CASE("combination of operator* and operator++", "[map]") {
+  auto m = map([](auto x) { return x; }, std::string{"World"});
+  auto iter = m.begin();
+  REQUIRE(*iter == 'W');
+  ++iter;
+  REQUIRE(*iter == 'o');
+  iter++;
+  REQUIRE(*iter == 'r');
+  char c = *++iter;
+  REQUIRE(c == 'l');
+  c = *iter++;
+  REQUIRE(c == 'l');
+}

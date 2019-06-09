@@ -27,7 +27,7 @@ if( MSVC )
 endif()
 
 # target for test runner.
-add_executable( test_itertools )
+add_executable( test_itertools test/test_filter.cpp )
 target_sources( test_itertools PRIVATE
                 test/test_main.cpp
                 test/test_iterable_wrapper.cpp
