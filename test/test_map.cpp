@@ -34,8 +34,11 @@ TEST_CASE("map a single iterable", "[map]") {
 
   SECTION("lvalue array") {
     int arr[] = {1, 2, 3};
-    for (auto i : map([](auto x) { return x * 2; }, arr)) {
-      std::cout << i << ' ';
+    std::size_t i = 0;
+    for (auto val : map([](auto x) { return x * 2; }, arr)) {
+      REQUIRE(val == arr[i] * 2);
+      i++;
+      std::cout << val << ' ';
     }
     std::cout << '\n';
   }
@@ -64,7 +67,11 @@ TEST_CASE("map a list of iterables", "[map]") {
     };
     char chars[] = {'a', 'b', 'c'};
     std::size_t cnt[] = {1, 2, 3};
+    std::size_t i = 0;
     for (auto &&str : map(func, chars, cnt)) {
+      REQUIRE(str.size() == cnt[i]);
+      REQUIRE(str[0] == chars[i]);
+      i++;
       std::cout << str << '\n';
     }
   }

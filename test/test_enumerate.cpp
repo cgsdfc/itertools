@@ -1,21 +1,27 @@
 //
 // Created by cgsdfc on 19-6-6.
 //
+
 #include <catch2/catch.hpp>
 #include <iostream>
 #include "itertools/enumerate.h"
 #include "itertools/range.h"
+
 using itertools::enumerate;
 
 TEST_CASE("", "[enumerate][lvalue]") {
   std::vector vec = {1, 2, 3};
+  std::size_t i = 0;
   SECTION("iterate") {
     for (auto item : enumerate(vec)) {
+      REQUIRE(i == item.first);
+      REQUIRE(vec[i] == item.second);
+      ++i;
       std::cout << "index: " << item.first << " value: " << item.second << '\n';
     }
   }
 
-  SECTION("iterate with structural assignment") {
+  SECTION("structural binding") {
     for (auto[index, value] : enumerate(vec)) {
       std::cout << index << " " << value << '\n';
     }
@@ -23,6 +29,7 @@ TEST_CASE("", "[enumerate][lvalue]") {
 
   SECTION("start from other value") {
     for (auto[index, value] : enumerate(vec, 1)) {
+      REQUIRE(index == value);
       std::cout << index << " " << value << '\n';
     }
   }
@@ -31,7 +38,8 @@ TEST_CASE("", "[enumerate][lvalue]") {
     for (auto item : enumerate(vec)) {
       item.second = 1;
     }
-    REQUIRE(std::all_of(vec.begin(), vec.end(), [](auto value) -> bool { return value == 1; }));
+    REQUIRE(std::all_of(vec.begin(), vec.end(),
+                        [](auto value) -> bool { return value == 1; }));
   }
 
   SECTION("iterate over const container") {
@@ -41,14 +49,14 @@ TEST_CASE("", "[enumerate][lvalue]") {
     }
   }
 
-  SECTION("C array can be used") {
+  SECTION("C array lvalue") {
     int arr[] = {1, 2, 3, 4};
     for (auto[id, val]:enumerate(arr)) {
       REQUIRE(id == val - 1);
     }
   }
 
-  SECTION("initializer_list can be used") {
+  SECTION("initializer_list lvalue") {
     std::initializer_list<int> init = {1, 2, 3, 4};
     for (auto[id, val]:enumerate(init)) {
       REQUIRE(id == val - 1);
@@ -56,20 +64,18 @@ TEST_CASE("", "[enumerate][lvalue]") {
   }
 }
 
-TEST_CASE("", "[enumerate][rvalue]") {
-  SECTION("vector") {
-    auto e = enumerate(std::vector{1, 2});
-    for (auto item: e) {
-      printf("%d %d\n", item.first, item.second);
-    }
+TEST_CASE("vector rvalue", "[enumerate][rvalue]") {
+  auto e = enumerate(std::vector{1, 2});
+  for (auto item: e) {
+    REQUIRE(item.first == item.second - 1);
+    printf("%d %d\n", item.first, item.second);
   }
-
 }
 
-TEST_CASE("", "[enumerate][range]") {
+TEST_CASE("enumerating a range produces a (x, x)", "[enumerate][range]") {
   using itertools::range;
   auto e = enumerate(range(10));
   for (auto item: e) {
-    printf("%d %d\n", item.first, item.second);
+    REQUIRE(item.first == item.second);
   }
 }
