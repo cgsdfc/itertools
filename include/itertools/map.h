@@ -49,6 +49,47 @@ private:
   wrapped_iterable iterable_;
 };
 
+template <class Callable, class Iterable>
+class map<Callable, Iterable> {
+public:
+  using traits = iterable_traits<Iterable>;
+  using wrapped_iterable = typename traits::wrapped_iterable;
+  using raw_iterator = typename traits::raw_iterator;
+  using value_type = typename std::invoke_result<Callable, typename traits::deref_value_type>::type;
+
+  class iterator : public std::iterator<std::forward_iterator_tag, value_type> {
+    Callable func_;
+    raw_iterator arg_;
+  public:
+    iterator(Callable func, raw_iterator arg) : func_(std::move(func)), arg_(std::move(arg)) {}
+    value_type operator*() {
+      return func_(*arg_);
+    }
+    bool operator==(const iterator &that) const {
+      return arg_ == that.arg_;
+    }
+    iterator &operator++() {
+      ++arg_;
+      return *this;
+    }
+    ITERTOOLS_IMPL_NEQ_POST_INC(iterator)
+  };
+
+  map(Callable func, Iterable &&iterable)
+      : func_(std::move(func)), iterable_(std::forward<Iterable>(iterable)) {}
+
+  iterator begin() {
+    return iterator(func_, std::begin(iterable_));
+  }
+  iterator end() {
+    return iterator(func_, std::end(iterable_));
+  }
+  ITERTOOLS_IMPL_CONST_BEGIN_END(map)
+private:
+  Callable func_;
+  wrapped_iterable iterable_;
+};
+
 template <class Callable, class ... Iterables>
 map(Callable, Iterables &&...) -> map<Callable, Iterables && ...>;
 

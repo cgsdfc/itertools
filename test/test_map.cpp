@@ -13,7 +13,11 @@ using itertools::map;
 TEST_CASE("map a single iterable", "[map]") {
   SECTION("rvalue of vector") {
     // vector has no such issue.
-    auto m = map([](int x) { return std::sqrt(x); }, std::vector<int>{1, 2, 3});
+    auto m = map([](int x) { return std::sqrt(x); }, std::vector{1, 2, 3});
+    REQUIRE(m.end() == m.end());
+    REQUIRE(m.begin() == m.begin());
+    REQUIRE(m.begin() != m.end());
+
     for (auto v:m) {
       printf("%lf\n", v);
     }
