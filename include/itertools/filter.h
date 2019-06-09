@@ -61,7 +61,7 @@ private:
   wrapped_iterable iterable_;
 };
 
-#define INSTANTIATE_FILTER(NAME, FILTER_FALSE) \
+#define ITERTOOLS_INSTANTIATE_FILTER(NAME, FILTER_FALSE) \
 template <class Callable, class Iterable> \
 struct NAME : basic_filter<Callable, Iterable, FILTER_FALSE> { \
   NAME(Callable func, Iterable &&iterable) \
@@ -70,9 +70,8 @@ struct NAME : basic_filter<Callable, Iterable, FILTER_FALSE> { \
 template <class Callable, class Iterable> \
 NAME(Callable func, Iterable &&iterable) ->NAME<Callable, Iterable &&>;
 
-INSTANTIATE_FILTER(filter, false)
-INSTANTIATE_FILTER(filter_false, true)
-
+ITERTOOLS_INSTANTIATE_FILTER(filter, false)
+ITERTOOLS_INSTANTIATE_FILTER(filter_false, true)
 }
 
 #endif //ITERTOOLS_FILTER_H
