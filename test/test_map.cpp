@@ -11,7 +11,7 @@
 using itertools::map;
 
 TEST_CASE("map a single iterable", "[map]") {
-  SECTION("rvalue of vector") {
+  SECTION("rvalue vector") {
     // vector has no such issue.
     auto m = map([](int x) { return std::sqrt(x); }, std::vector{1, 2, 3});
     REQUIRE(m.end() == m.end());
@@ -23,7 +23,7 @@ TEST_CASE("map a single iterable", "[map]") {
     }
   }
 
-  SECTION("lvalue") {
+  SECTION("lvalue vector") {
     std::vector vec{1, 2, 3};
     auto cnt = 1;
     for (auto v: map([](auto val) { return 2 * val; }, vec)) {
@@ -31,19 +31,21 @@ TEST_CASE("map a single iterable", "[map]") {
       ++cnt;
     }
   }
+
+  SECTION("lvalue array") {
+    int arr[] = {1, 2, 3};
+    for (auto i : map([](auto x) { return x * 2; }, arr)) {
+      std::cout << i << ' ';
+    }
+    std::cout << '\n';
+  }
+
   SECTION("upper case a string") {
     std::string s{"hello"};
     auto m = map(::toupper, s);
     std::string out;
     std::copy(m.begin(), m.end(), std::back_inserter(out));
     REQUIRE(out == "HELLO");
-  }
-  SECTION("map a C array") {
-    int arr[] = {1, 2, 3};
-    for (auto i : map([](auto x) { return x * 2; }, arr)) {
-      std::cout << i << ' ';
-    }
-    std::cout << '\n';
   }
 }
 

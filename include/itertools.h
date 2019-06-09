@@ -9,5 +9,6 @@
 #include "itertools/enumerate.h"
 #include "itertools/zip.h"
 #include "itertools/range.h"
+#include "itertools/map.h"
 
 #endif //ITERTOOLS_ITERTOOLS_H

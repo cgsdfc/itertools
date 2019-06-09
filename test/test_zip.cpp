@@ -63,6 +63,5 @@ TEST_CASE("zip one or more iterable", "[zip]") {
       ++cnt;
     }
     REQUIRE(cnt == shortest_seq.size());
-
   }
 }
