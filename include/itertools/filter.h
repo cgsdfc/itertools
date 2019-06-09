@@ -23,21 +23,23 @@ public:
   public:
     iterator(Callable func, raw_iterator iter) : func_(std::move(func)), iter_(std::move(iter)) {}
     deref_value_type operator*() const {
+      // We have to skip since a value is needed right now.
+      // And in most cases this is guarded by operator==.
       while (FilterFalse == func_(*iter_)) {
         ++iter_;
       }
       return *iter_;
     }
     bool operator==(const iterator &that) const {
+      // We have to skip since the end (that) is passed in and it's time to consume the iter safely (without going out of range)
       while (iter_ != that.iter_ && FilterFalse == func_(*iter_)) {
         ++iter_;
       }
       return iter_ == that.iter_;
     }
     iterator &operator++() {
-      do {
-        ++iter_;
-      } while (FilterFalse == func_(*iter_));
+      // We don't skip here since it is unsafe (without end known) and the result is not needed.
+      ++iter_;
       return *this;
     }
     ITERTOOLS_IMPL_NEQ_POST_INC(iterator)

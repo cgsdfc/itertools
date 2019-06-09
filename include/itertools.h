@@ -10,5 +10,6 @@
 #include "itertools/zip.h"
 #include "itertools/range.h"
 #include "itertools/map.h"
+#include "itertools/filter.h"
 
 #endif //ITERTOOLS_ITERTOOLS_H

@@ -8,13 +8,35 @@
 using itertools::filter;
 using itertools::filter_false;
 
-TEST_CASE("filter") {
+TEST_CASE("iterator stepping", "[filter]") {
   std::vector v(5, 0);
   std::iota(v.begin(), v.end(), 0);
   auto f = filter([](int val) { return val % 2 == 0; }, v);
   auto iter = f.begin();
-  REQUIRE(*iter++ == 0);
-  REQUIRE(*iter++ == 2);
-  REQUIRE(*iter++ == 4);
-  REQUIRE(iter == f.end());
+
+  // dereference any time yield the same result.
+  REQUIRE(*iter == 0);
+  REQUIRE(*iter == 0);
+  REQUIRE(*iter == 0);
+
+  // compare to end() always yield the same result.
+  REQUIRE(iter != f.end());
+  REQUIRE(iter != f.end());
+  REQUIRE(iter != f.end());
+
+  ++iter;
+  REQUIRE(*iter == 2);
+  REQUIRE(*++iter == 4);
+  REQUIRE(*iter == 4);
+  REQUIRE(++iter == f.end());
+}
+
+TEST_CASE("loop over", "[filter]") {
+  std::size_t i = 1;
+  for (auto val : filter([](auto val) -> bool { val > 0; },
+                         std::vector{-3, -2, -1, 0, 1, 2, 3})) {
+    REQUIRE(val == i);
+    REQUIRE(val > 0);
+    ++i;
+  }
 }
