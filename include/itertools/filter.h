@@ -71,7 +71,7 @@ template <class Callable, class Iterable> \
 NAME(Callable func, Iterable &&iterable) ->NAME<Callable, Iterable &&>;
 
 ITERTOOLS_INSTANTIATE_FILTER(filter, false)
-ITERTOOLS_INSTANTIATE_FILTER(filter_false, true)
+ITERTOOLS_INSTANTIATE_FILTER(filterfalse, true)
 }
 
 #endif //ITERTOOLS_FILTER_H

@@ -3,10 +3,13 @@
 //
 
 #include <catch2/catch.hpp>
+#include <numeric>
+#include <string>
 #include "itertools/filter.h"
 
+using namespace std::literals;
 using itertools::filter;
-using itertools::filter_false;
+using itertools::filterfalse;
 
 TEST_CASE("iterator stepping", "[filter]") {
   std::vector v(5, 0);
@@ -38,5 +41,13 @@ TEST_CASE("loop over", "[filter]") {
     REQUIRE(val == i);
     REQUIRE(val > 0);
     ++i;
+  }
+}
+
+TEST_CASE("filterfalse", "[filterfalse]") {
+  auto ff = filterfalse([](auto &&str) -> bool { return !str.empty(); },
+                         std::array{""s, ""s, "a"s, "b"s, ""s});
+  for (auto &&str : ff) {
+    REQUIRE(str.empty());
   }
 }
