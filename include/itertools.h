@@ -11,5 +11,6 @@
 #include "itertools/range.h"
 #include "itertools/map.h"
 #include "itertools/filter.h"
+#include "itertools/repeat.h"
 
 #endif //ITERTOOLS_ITERTOOLS_H

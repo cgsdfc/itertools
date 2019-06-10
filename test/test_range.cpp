@@ -107,5 +107,22 @@ TEST_CASE("combination of operator++ and operator*", "[range]") {
   REQUIRE(*iter++ == 2);
   REQUIRE(*iter == 3);
   REQUIRE(*++iter == 4);
+}
 
+TEST_CASE("range with different numbers of arguments", "[range]") {
+  auto r1 = range(10);
+  auto r2 = range(0, 10);
+  auto r3 = range(0, 10, 1);
+  SECTION("range objects have smaller size") {
+    REQUIRE(sizeof(r1) < sizeof(r2));
+    REQUIRE(sizeof(r2) < sizeof(r3));
+  }
+
+  auto i1 = r1.begin();
+  auto i2 = r2.begin();
+  auto i3 = r3.begin();
+  SECTION("range iterators have smaller size") {
+    REQUIRE(sizeof(i1) <= sizeof(i2));
+    REQUIRE(sizeof(i2) < sizeof(i3));
+  }
 }

@@ -11,7 +11,7 @@ using namespace std::literals;
 using itertools::filter;
 using itertools::filterfalse;
 
-TEST_CASE("iterator stepping", "[filter]") {
+TEST_CASE("single_step_iterator stepping", "[filter]") {
   std::vector v(5, 0);
   std::iota(v.begin(), v.end(), 0);
   auto f = filter([](int val) { return val % 2 == 0; }, v);
