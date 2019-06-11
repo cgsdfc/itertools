@@ -68,7 +68,7 @@ TEST_CASE("vector rvalue", "[enumerate][rvalue]") {
   auto e = enumerate(std::vector{1, 2});
   for (auto item: e) {
     REQUIRE(item.first == item.second - 1);
-    printf("%d %d\n", item.first, item.second);
+    printf("%ld %d\n", item.first, item.second);
   }
 }
 
