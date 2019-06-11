@@ -1,12 +1,12 @@
 [00:00:00] Build started
 [00:00:00] git clone -q --branch=master https://github.com/cgsdfc/itertools.git C:\projects\itertools
-[00:00:01] git checkout -qf 058243204979ffe0f50f1256b52c901a35939f3d
+[00:00:01] git checkout -qf b977d1db511fa2b2e8ef84d0b7945dbcb56cd373
 [00:00:01] Running Install scripts
 [00:00:01] if (($env:CONFIGURATION) -eq "Debug" -And ($env:coverage) -eq "1" ) { python -m pip --disable-pip-version-check install codecov }
 [00:00:01] if (($env:CONFIGURATION) -eq "Debug" -And ($env:coverage) -eq "1" ) { .\misc\installOpenCppCoverage.ps1 }
 [00:00:01] set CXXFLAGS=%additional_flags%
 [00:00:01] pip.exe install conan
-[00:00:02] Collecting conan
+[00:00:03] Collecting conan
 [00:00:04]   Downloading https://files.pythonhosted.org/packages/d0/2c/2737696b33bbadc1b5668e4d0ed95baa56954d3a81d874099b6d242bae36/conan-1.16.0.tar.gz (518kB)
 [00:00:05] Collecting PyJWT<2.0.0,>=1.4.0 (from conan)
 [00:00:05]   Downloading https://files.pythonhosted.org/packages/87/8b/6a9f14b5f781697e51259d81657e6048fd31a113229cf346880bb7545565/PyJWT-1.7.1-py2.py3-none-any.whl
@@ -16,522 +16,296 @@
 [00:00:05]   Downloading https://files.pythonhosted.org/packages/4f/a6/728666f39bfff1719fc94c481890b2106837da9318031f71a8424b662e12/colorama-0.4.1-py2.py3-none-any.whl
 [00:00:05] Collecting PyYAML<6.0,>=3.11 (from conan)
 [00:00:05]   Downloading https://files.pythonhosted.org/packages/3c/be/0f0d87e4bbbaecefb069d76a443e5ca2ed3a41505d8b2aae7e179ff2fc92/PyYAML-5.1.1-cp27-cp27m-win32.whl (193kB)
-[00:00:05] Collecting patch==1.16 (from conan)
-[00:00:05]   Downloading https://files.pythonhosted.org/packages/da/74/0815f03c82f4dc738e2bfc5f8966f682bebcc809f30c8e306e6cc7156a99/patch-1.16.zip
-[00:00:05] Collecting fasteners>=0.14.1 (from conan)
-[00:00:05]   Downloading https://files.pythonhosted.org/packages/18/bd/55eb2d6397b9c0e263af9d091ebdb756b15756029b3cededf6461481bc63/fasteners-0.15-py2.py3-none-any.whl
-[00:00:05] Collecting six>=1.10.0 (from conan)
-[00:00:05]   Downloading https://files.pythonhosted.org/packages/73/fb/00a976f728d0d1fecfe898238ce23f502a721c0ac0ecfedb80e0d88c64e9/six-1.12.0-py2.py3-none-any.whl
-[00:00:05] Collecting node-semver==0.6.1 (from conan)
+[00:00:06] Collecting patch==1.16 (from conan)
+[00:00:06]   Downloading https://files.pythonhosted.org/packages/da/74/0815f03c82f4dc738e2bfc5f8966f682bebcc809f30c8e306e6cc7156a99/patch-1.16.zip
+[00:00:06] Collecting fasteners>=0.14.1 (from conan)
+[00:00:06]   Downloading https://files.pythonhosted.org/packages/18/bd/55eb2d6397b9c0e263af9d091ebdb756b15756029b3cededf6461481bc63/fasteners-0.15-py2.py3-none-any.whl
+[00:00:06] Collecting six>=1.10.0 (from conan)
+[00:00:06]   Downloading https://files.pythonhosted.org/packages/73/fb/00a976f728d0d1fecfe898238ce23f502a721c0ac0ecfedb80e0d88c64e9/six-1.12.0-py2.py3-none-any.whl
+[00:00:06] Collecting node-semver==0.6.1 (from conan)
 [00:00:06]   Downloading https://files.pythonhosted.org/packages/f1/4e/1d9a619dcfd9f42d0e874a5b47efa0923e84829886e6a47b45328a1f32f1/node-semver-0.6.1.tar.gz
-[00:00:06] Collecting distro<1.2.0,>=1.0.2 (from conan)
-[00:00:06]   Downloading https://files.pythonhosted.org/packages/b0/55/29bfd4d4d4149e860ed01aa446108eb17b240997b746c06a2d0c8ce04f69/distro-1.1.0-py2.py3-none-any.whl
-[00:00:06] Collecting pylint!=2.3.0,>=1.9.3 (from conan)
-[00:00:06]   Downloading https://files.pythonhosted.org/packages/59/65/adcffa71fe942313c4d9e9284565d9a9e67798f4771f464e1d5dd58fea88/pylint-1.9.4-py2.py3-none-any.whl (689kB)
-[00:00:07] Collecting future==0.16.0 (from conan)
-[00:00:07]   Downloading https://files.pythonhosted.org/packages/00/2b/8d082ddfed935f3608cc61140df6dcbf0edea1bc3ab52fb6c29ae3e81e85/future-0.16.0.tar.gz (824kB)
-[00:00:07] Collecting pygments<3.0,>=2.0 (from conan)
-[00:00:08]   Downloading https://files.pythonhosted.org/packages/5c/73/1dfa428150e3ccb0fa3e68db406e5be48698f2a979ccbcec795f28f44048/Pygments-2.4.2-py2.py3-none-any.whl (883kB)
-[00:00:08] Collecting astroid>=1.6.5 (from conan)
-[00:00:08]   Downloading https://files.pythonhosted.org/packages/8b/29/0f7ec6fbf28a158886b7de49aee3a77a8a47a7e24c60e9fd6ec98ee2ec02/astroid-1.6.6-py2.py3-none-any.whl (305kB)
-[00:00:08] Collecting deprecation<2.1,>=2.0 (from conan)
-[00:00:08]   Downloading https://files.pythonhosted.org/packages/32/e9/01ffbaf3540ad54476cd7066439d629f1dd73b851cc5c0993ce2c12e1cdd/deprecation-2.0.6-py2.py3-none-any.whl
-[00:00:08] Collecting tqdm<5,>=4.28.1 (from conan)
-[00:00:08]   Downloading https://files.pythonhosted.org/packages/45/af/685bf3ce889ea191f3b916557f5677cc95a5e87b2fa120d74b5dd6d049d0/tqdm-4.32.1-py2.py3-none-any.whl (49kB)
-[00:00:08] Collecting Jinja2<3,>=2.3 (from conan)
-[00:00:08]   Downloading https://files.pythonhosted.org/packages/1d/e7/fd8b501e7a6dfe492a433deb7b9d833d39ca74916fa8bc63dd1a4947a671/Jinja2-2.10.1-py2.py3-none-any.whl (124kB)
-[00:00:08] Collecting python-dateutil<3,>=2.6.0 (from conan)
-[00:00:08]   Downloading https://files.pythonhosted.org/packages/41/17/c62faccbfbd163c7f57f3844689e3a78bae1f403648a6afb1d0866d87fbb/python_dateutil-2.8.0-py2.py3-none-any.whl (226kB)
-[00:00:08] Collecting bottle<0.13,>=0.12.8 (from conan)
-[00:00:08]   Downloading https://files.pythonhosted.org/packages/32/4e/ed046324d5ec980c252987c1dca191e001b9f06ceffaebf037eef469937c/bottle-0.12.16.tar.gz (72kB)
-[00:00:09] Collecting pluginbase<1.0,>=0.5 (from conan)
-[00:00:09]   Downloading https://files.pythonhosted.org/packages/6e/f4/1db0a26c1c7fad81a1214ad1b02839a7bd98d8ba68f782f6edcc3d343441/pluginbase-0.7.tar.gz (40kB)
-[00:00:09] Collecting certifi>=2017.4.17 (from requests<3.0.0,>=2.8.1->conan)
-[00:00:09]   Downloading https://files.pythonhosted.org/packages/60/75/f692a584e85b7eaba0e03827b3d51f45f571c2e793dd731e598828d380aa/certifi-2019.3.9-py2.py3-none-any.whl (158kB)
-[00:00:09] Collecting urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 (from requests<3.0.0,>=2.8.1->conan)
-[00:00:09]   Downloading https://files.pythonhosted.org/packages/e6/60/247f23a7121ae632d62811ba7f273d0e58972d75e58a94d329d51550a47d/urllib3-1.25.3-py2.py3-none-any.whl (150kB)
-[00:00:09] Collecting idna<2.9,>=2.5 (from requests<3.0.0,>=2.8.1->conan)
-[00:00:09]   Downloading https://files.pythonhosted.org/packages/14/2c/cd551d81dbe15200be1cf41cd03869a46fe7226e7450af7a6545bfc474c9/idna-2.8-py2.py3-none-any.whl (58kB)
-[00:00:09] Collecting chardet<3.1.0,>=3.0.2 (from requests<3.0.0,>=2.8.1->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl (133kB)
-[00:00:10] Collecting monotonic>=0.1 (from fasteners>=0.14.1->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/ac/aa/063eca6a416f397bd99552c534c6d11d57f58f2e94c14780f3bbf818c4cf/monotonic-1.5-py2.py3-none-any.whl
-[00:00:10] Collecting isort>=4.2.5 (from pylint!=2.3.0,>=1.9.3->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/1c/d9/bf5848b376e441ff358a14b954476423eeeb8c9b78c10074b7f53ce2918d/isort-4.3.20-py2.py3-none-any.whl (42kB)
-[00:00:10] Collecting singledispatch; python_version < "3.4" (from pylint!=2.3.0,>=1.9.3->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/c5/10/369f50bcd4621b263927b0a1519987a04383d4a98fb10438042ad410cf88/singledispatch-3.4.0.3-py2.py3-none-any.whl
-[00:00:10] Collecting configparser; python_version == "2.7" (from pylint!=2.3.0,>=1.9.3->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/ba/05/6c96328e92e625fc31445d24d75a2c92ef9ba34fc5b037fe69693c362a0d/configparser-3.7.4-py2.py3-none-any.whl
-[00:00:10] Collecting backports.functools-lru-cache; python_version == "2.7" (from pylint!=2.3.0,>=1.9.3->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/03/8e/2424c0e65c4a066e28f539364deee49b6451f8fcd4f718fefa50cc3dcf48/backports.functools_lru_cache-1.5-py2.py3-none-any.whl
-[00:00:10] Collecting mccabe (from pylint!=2.3.0,>=1.9.3->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/87/89/479dc97e18549e21354893e4ee4ef36db1d237534982482c3681ee6e7b57/mccabe-0.6.1-py2.py3-none-any.whl
-[00:00:10] Collecting enum34>=1.1.3; python_version < "3.4" (from astroid>=1.6.5->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/c5/db/e56e6b4bbac7c4a06de1c50de6fe1ef3810018ae11732a50f15f62c7d050/enum34-1.1.6-py2-none-any.whl
-[00:00:10] Collecting lazy-object-proxy (from astroid>=1.6.5->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/39/36/cb2b3be5cb25537000670dbcfcf013873b6d970b1ba0edeb100c137e7d47/lazy_object_proxy-1.4.1-cp27-cp27m-win32.whl
-[00:00:10] Collecting wrapt (from astroid>=1.6.5->conan)
-[00:00:10]   Downloading https://files.pythonhosted.org/packages/67/b2/0f71ca90b0ade7fad27e3d20327c996c6252a2ffe88f50a95bba7434eda9/wrapt-1.11.1.tar.gz
-[00:00:11] Collecting packaging (from deprecation<2.1,>=2.0->conan)
-[00:00:11]   Downloading https://files.pythonhosted.org/packages/91/32/58bc30e646e55eab8b21abf89e353f59c0cc02c417e42929f4a9546e1b1d/packaging-19.0-py2.py3-none-any.whl
-[00:00:11] Collecting MarkupSafe>=0.23 (from Jinja2<3,>=2.3->conan)
-[00:00:11]   Downloading https://files.pythonhosted.org/packages/20/40/49d725372f8f49df9891e7ea5f5d36489da85a277621177ad4af68992769/MarkupSafe-1.1.1-cp27-cp27m-win32.whl
-[00:00:11] Collecting futures; python_version < "3.2" (from isort>=4.2.5->pylint!=2.3.0,>=1.9.3->conan)
-[00:00:11]   Downloading https://files.pythonhosted.org/packages/2d/99/b2c4e9d5a30f6471e410a146232b4118e697fa3ffc06d6a65efde84debd0/futures-3.2.0-py2-none-any.whl
-[00:00:11] Collecting pyparsing>=2.0.2 (from packaging->deprecation<2.1,>=2.0->conan)
-[00:00:11]   Downloading https://files.pythonhosted.org/packages/dd/d9/3ec19e966301a6e25769976999bd7bbe552016f0d32b577dc9d63d2e0c49/pyparsing-2.4.0-py2.py3-none-any.whl (62kB)
-[00:00:11] Installing collected packages: PyJWT, certifi, urllib3, idna, chardet, requests, colorama, PyYAML, patch, six, monotonic, fasteners, node-semver, distro, backports.functools-lru-cache, futures, isort, enum34, lazy-object-proxy, singledispatch, wrapt, astroid, configparser, mccabe, pylint, future, pygments, pyparsing, packaging, deprecation, tqdm, MarkupSafe, Jinja2, python-dateutil, bottle, pluginbase, conan
-[00:00:12]   Running setup.py install for patch: started
-[00:00:12]     Running setup.py install for patch: finished with status 'done'
-[00:00:12]   Running setup.py install for node-semver: started
-[00:00:13]     Running setup.py install for node-semver: finished with status 'done'
-[00:00:13]   Running setup.py install for wrapt: started
-[00:00:13]     Running setup.py install for wrapt: finished with status 'done'
-[00:00:16]   Running setup.py install for future: started
-[00:00:17]     Running setup.py install for future: finished with status 'done'
-[00:00:19]   Running setup.py install for bottle: started
-[00:00:19]     Running setup.py install for bottle: finished with status 'done'
-[00:00:19]   Running setup.py install for pluginbase: started
-[00:00:20]     Running setup.py install for pluginbase: finished with status 'done'
-[00:00:20]   Running setup.py install for conan: started
-[00:00:21]     Running setup.py install for conan: finished with status 'done'
-[00:00:21] Successfully installed Jinja2-2.10.1 MarkupSafe-1.1.1 PyJWT-1.7.1 PyYAML-5.1.1 astroid-1.6.6 backports.functools-lru-cache-1.5 bottle-0.12.16 certifi-2019.3.9 chardet-3.0.4 colorama-0.4.1 conan-1.16.0 configparser-3.7.4 deprecation-2.0.6 distro-1.1.0 enum34-1.1.6 fasteners-0.15 future-0.16.0 futures-3.2.0 idna-2.8 isort-4.3.20 lazy-object-proxy-1.4.1 mccabe-0.6.1 monotonic-1.5 node-semver-0.6.1 packaging-19.0 patch-1.16 pluginbase-0.7 pygments-2.4.2 pylint-1.9.4 pyparsing-2.4.0 python-dateutil-2.8.0 requests-2.22.0 singledispatch-3.4.0.3 six-1.12.0 tqdm-4.32.1 urllib3-1.25.3 wrapt-1.11.1
-[00:00:22] You are using pip version 18.1, however version 19.1.1 is available.
-[00:00:22] You should consider upgrading via the 'python -m pip install --upgrade pip' command.
-[00:00:22] mkdir Build
-[00:00:22] cd Build
-[00:00:22] conan install ..
-[00:00:23] Auto detecting your dev setup to initialize the default profile (C:\Users\appveyor\.conan\profiles\default)
-[00:00:23] Found Visual Studio 15
-[00:00:24] Found clang 8.0
-[00:00:24] clang>=8, using the major as version
-[00:00:24] Default settings
-[00:00:24] 	os=Windows
-[00:00:24] 	os_build=Windows
-[00:00:24] 	arch=x86_64
-[00:00:24] 	arch_build=x86_64
-[00:00:24] 	compiler=Visual Studio
-[00:00:24] 	compiler.version=15
-[00:00:24] 	build_type=Release
-[00:00:24] *** You can change them in C:\Users\appveyor\.conan\profiles\default ***
-[00:00:24] *** Or override with -s compiler='other' -s ...s***
-[00:00:24] 
-[00:00:24] 
-[00:00:24] WARN: Remotes registry file missing, creating default one in C:\Users\appveyor\.conan\remotes.json
-[00:00:24] Configuration:
-[00:00:24] [settings]
-[00:00:24] arch=x86_64
-[00:00:24] arch_build=x86_64
-[00:00:24] build_type=Release
-[00:00:24] compiler=Visual Studio
-[00:00:24] compiler.runtime=MD
-[00:00:24] compiler.version=15
-[00:00:24] os=Windows
-[00:00:24] os_build=Windows
-[00:00:24] [options]
-[00:00:24] [build_requires]
-[00:00:24] [env]
-[00:00:24] 
-[00:00:24] Catch2/2.8.0@catchorg/stable: Not found in local cache, looking in remotes...
-[00:00:24] Catch2/2.8.0@catchorg/stable: Trying with 'conan-center'...
-[00:00:24] Downloading conanmanifest.txt
-[00:00:25] 
-[00:00:25] Downloading conanfile.py
-[00:00:25] 
-[00:00:25] Downloading conan_export.tgz
-[00:00:25] 
-[00:00:25] ....
-[00:00:25] Catch2/2.8.0@catchorg/stable: Downloaded recipe revision 0
-[00:00:26] conanfile.txt: Installing package
-[00:00:26] Requirements
-[00:00:26]     Catch2/2.8.0@catchorg/stable from 'conan-center' - Downloaded
-[00:00:26] Packages
-[00:00:26]     Catch2/2.8.0@catchorg/stable:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9 - Download
-[00:00:26] 
-[00:00:26] Catch2/2.8.0@catchorg/stable: Retrieving package 5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9 from remote 'conan-center' 
-[00:00:26] Downloading conanmanifest.txt
-[00:00:26] 
-[00:00:26] Downloading conaninfo.txt
-[00:00:26] 
-[00:00:26] Downloading conan_package.tgz
-[00:00:26] 
-[00:00:26] ....
-[00:00:26] Catch2/2.8.0@catchorg/stable: Package installed 5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
-[00:00:26] Catch2/2.8.0@catchorg/stable: Downloaded package revision 0
-[00:00:26] conanfile.txt: Generator txt created conanbuildinfo.txt
-[00:00:26] conanfile.txt: Generator cmake created conanbuildinfo.cmake
-[00:00:26] conanfile.txt: Generated conaninfo.txt
-[00:00:26] conanfile.txt: Generated graphinfo
-[00:00:27] cd ..
-[00:00:27] .\misc\appveyorBuildConfigurationScript.bat
-[00:00:27] -- Building for: Visual Studio 15 2017
-[00:00:37] -- The CXX compiler identification is MSVC 19.16.27030.1
-[00:00:37] -- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe
-[00:00:43] -- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe -- works
-[00:00:43] -- Detecting CXX compiler ABI info
-[00:00:48] -- Detecting CXX compiler ABI info - done
-[00:00:48] -- Detecting CXX compile features
-[00:00:54] -- Detecting CXX compile features - done
-[00:00:54] -- Conan: Adjusting output directories
-[00:00:54] -- Conan: Using cmake global configuration
-[00:00:54] -- Conan: Adjusting default RPATHs Conan policies
-[00:00:54] -- Conan: Adjusting language standard
-[00:00:54] -- Current conanbuildinfo.cmake directory: C:/projects/itertools/Build
-[00:00:54] -- C:/Users/appveyor/.conan/data/Catch2/2.8.0/catchorg/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib
-[00:00:54] -- Configuring done
-[00:00:54] -- Generating done
-[00:00:54] CMake Warning:
-[00:00:54]   Manually-specified variables were not used by the project:
-[00:00:54] 
-[00:00:54]     USE_WMAIN
-[00:00:54] 
-[00:00:54] 
-[00:00:54] -- Build files have been written to: C:/projects/itertools/Build
-[00:00:54] msbuild "C:\projects\itertools\Build\itertools.sln" /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-[00:00:55] Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
-[00:00:55] Copyright (C) Microsoft Corporation. All rights reserved.
-[00:00:55] 
-[00:00:55] Build started 6/7/2019 9:29:45 AM.
-[00:00:56]      1>Project "C:\projects\itertools\Build\itertools.sln" on node 1 (default targets).
-[00:00:56]      1>ValidateSolutionConfiguration:
-[00:00:56]          Building solution configuration "Release|Win32".
-[00:00:56]        ValidateProjects:
-[00:00:56]          The project "Continuous" is not selected for building in solution configuration "Release|Win32".
-[00:00:56]          The project "Experimental" is not selected for building in solution configuration "Release|Win32".
-[00:00:56]          The project "INSTALL" is not selected for building in solution configuration "Release|Win32".
-[00:00:56]          The project "Nightly" is not selected for building in solution configuration "Release|Win32".
-[00:00:56]          The project "NightlyMemoryCheck" is not selected for building in solution configuration "Release|Win32".
-[00:00:56]          The project "RUN_TESTS" is not selected for building in solution configuration "Release|Win32".
-[00:00:59]      1>Project "C:\projects\itertools\Build\itertools.sln" (1) is building "C:\projects\itertools\Build\ALL_BUILD.vcxproj.metaproj" (2) on node 1 (default targets).
-[00:00:59]      2>Project "C:\projects\itertools\Build\ALL_BUILD.vcxproj.metaproj" (2) is building "C:\projects\itertools\Build\ZERO_CHECK.vcxproj" (4) on node 2 (default targets).
-[00:00:59]      4>PrepareForBuild:
-[00:00:59]          Creating directory "Win32\Release\ZERO_CHECK\".
-[00:00:59]          Creating directory "C:\projects\itertools\Build\Release\".
-[00:00:59]          Creating directory "Win32\Release\ZERO_CHECK\ZERO_CHECK.tlog\".
-[00:00:59]        InitializeBuildStatus:
-[00:00:59]          Creating "Win32\Release\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-[00:00:59]        CustomBuild:
-[00:00:59]          Checking Build System
-[00:00:59]          CMake does not need to re-run because C:/projects/itertools/Build/CMakeFiles/generate.stamp is up-to-date.
-[00:00:59]        FinalizeBuildStatus:
-[00:00:59]          Deleting file "Win32\Release\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild".
-[00:00:59]          Touching "Win32\Release\ZERO_CHECK\ZERO_CHECK.tlog\ZERO_CHECK.lastbuildstate".
-[00:00:59]      4>Done Building Project "C:\projects\itertools\Build\ZERO_CHECK.vcxproj" (default targets).
-[00:01:00]      1>Project "C:\projects\itertools\Build\itertools.sln" (1) is building "C:\projects\itertools\Build\test_itertools.vcxproj.metaproj" (3) on node 1 (default targets).
-[00:01:00]      3>Project "C:\projects\itertools\Build\test_itertools.vcxproj.metaproj" (3) is building "C:\projects\itertools\Build\test_itertools.vcxproj" (5) on node 1 (default targets).
-[00:01:00]      5>PrepareForBuild:
-[00:01:00]          Creating directory "test_itertools.dir\Release\".
-[00:01:00]          Creating directory "C:\projects\itertools\Build\bin\".
-[00:01:00]          Creating directory "test_itertools.dir\Release\test_itertools.tlog\".
-[00:01:00]        InitializeBuildStatus:
-[00:01:00]          Creating "test_itertools.dir\Release\test_itertools.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-[00:01:00]        CustomBuild:
-[00:01:00]          Building Custom Rule C:/projects/itertools/CMakeLists.txt
-[00:01:00]          CMake does not need to re-run because C:/projects/itertools/Build/CMakeFiles/generate.stamp is up-to-date.
-[00:01:00]        VcpkgTripletSelection:
-[00:01:00]          Using triplet "x86-windows" from "C:\Tools\vcpkg\installed\x86-windows\"
-[00:01:00]        ClCompile:
-[00:01:00]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /IC:\Users\appveyor\.conan\data\Catch2\2.8.0\catchorg\stable\package\5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9\include /IC:\projects\itertools\include /I"C:\Tools\vcpkg\installed\x86-windows\include" /nologo /W3 /WX- /diagnostics:classic /O2 /Ob2 /Oy- /D WIN32 /D _WINDOWS /D NDEBUG /D "CMAKE_INTDIR=\"Release\"" /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"test_itertools.dir\Release\\" /Fd"test_itertools.dir\Release\vc141.pdb" /Gd /TP /analyze- /errorReport:queue  /permissive- C:\projects\itertools\test\test_main.cpp C:\projects\itertools\test\test_iterable_wrapper.cpp C:\projects\itertools\test\test_enumerate.cpp C:\projects\itertools\test\test_zip.cpp C:\projects\itertools\test\test_range.cpp C:\projects\itertools\test\test_rvalue_ref_to_array.cpp C:\projects\itertools\test\test_map.cpp
-[00:01:00]          test_main.cpp
-[00:01:04]          test_iterable_wrapper.cpp
-[00:01:05]          test_enumerate.cpp
-[00:01:06]          test_zip.cpp
-[00:01:08]          test_range.cpp
-[00:01:09]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(462): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::iterator_category': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:10]                  ]
-[00:01:10]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4294): note: see declaration of 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::iterator_category'
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:10]                  ]
-[00:01:10]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(491): note: see reference to class template instantiation 'std::_Iterator_traits_base<_Iter,void>' being compiled
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _Iter=itertools::zip<itertools::range<int> &&,itertools::range<int> &&>::iterator
-[00:01:10]                  ]
-[00:01:10]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(545): note: see reference to class template instantiation 'std::iterator_traits<_Iter>' being compiled
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _Iter=itertools::zip<itertools::range<int> &&,itertools::range<int> &&>::iterator
-[00:01:10]                  ]
-[00:01:10]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(545): note: see reference to alias template instantiation 'std::_Iter_cat_t<itertools::zip<itertools::range<int> &&,itertools::range<int> &&>::iterator>' being compiled
-[00:01:10]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(945): note: see reference to variable template 'const bool _Is_random_iter_v<itertools::zip<itertools::range<int> &&,itertools::range<int> &&>::iterator>' being compiled
-[00:01:10]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(2444): note: see reference to function template instantiation 'auto std::_Idl_distance<_InIt,_Iter>(const _Iter &,const _Iter &)' being compiled
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _InIt=itertools::zip<itertools::range<int> &&,itertools::range<int> &&>::iterator,
-[00:01:10]                      _Iter=itertools::zip<itertools::range<int> &&,itertools::range<int> &&>::iterator
-[00:01:10]                  ]
-[00:01:10]          C:\projects\itertools\test\test_range.cpp(57): note: see reference to function template instantiation '_OutIt std::copy<itertools::zip<itertools::range<int> &&,itertools::range<int> &&>::iterator,std::back_insert_iterator<std::vector<std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,std::allocator<_Ty>>>>(_InIt,_InIt,_OutIt)' being compiled
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _OutIt=std::back_insert_iterator<std::vector<std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,std::allocator<std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>>>>,
-[00:01:10]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,
-[00:01:10]                      _InIt=itertools::zip<itertools::range<int> &&,itertools::range<int> &&>::iterator
-[00:01:10]                  ]
-[00:01:10]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(463): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::value_type': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:10]                  ]
-[00:01:10]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4295): note: see declaration of 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::value_type'
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:10]                  ]
-[00:01:10]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(464): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::difference_type': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:10]                  ]
-[00:01:10]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4296): note: see declaration of 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::difference_type'
-[00:01:10]                  with
-[00:01:10]                  [
-[00:01:10]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:10]                  ]
-[00:01:10]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(466): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::pointer': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:11]                  ]
-[00:01:11]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4297): note: see declaration of 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::pointer'
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:11]                  ]
-[00:01:11]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(467): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::reference': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:11]                  ]
-[00:01:11]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4298): note: see declaration of 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::reference'
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Ty=std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>
-[00:01:11]                  ]
-[00:01:11]          test_rvalue_ref_to_array.cpp
-[00:01:11]          test_map.cpp
-[00:01:11]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(462): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::iterator_category': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Ty=int
-[00:01:11]                  ]
-[00:01:11]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4294): note: see declaration of 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::iterator_category'
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Ty=int
-[00:01:11]                  ]
-[00:01:11]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(491): note: see reference to class template instantiation 'std::_Iterator_traits_base<_Iter,void>' being compiled
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Iter=itertools::map<int (__cdecl *)(int),std::string &>::iterator
-[00:01:11]                  ]
-[00:01:11]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(545): note: see reference to class template instantiation 'std::iterator_traits<_Iter>' being compiled
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Iter=itertools::map<int (__cdecl *)(int),std::string &>::iterator
-[00:01:11]                  ]
-[00:01:11]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(545): note: see reference to alias template instantiation 'std::_Iter_cat_t<itertools::map<int (__cdecl *)(int),std::string &>::iterator>' being compiled
-[00:01:11]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(945): note: see reference to variable template 'const bool _Is_random_iter_v<itertools::map<int (__cdecl*)(int),std::basic_string<char,std::char_traits<char>,std::allocator<char> > &>::iterator>' being compiled
-[00:01:11]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(2444): note: see reference to function template instantiation 'auto std::_Idl_distance<_InIt,_Iter>(const _Iter &,const _Iter &)' being compiled
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _InIt=itertools::map<int (__cdecl *)(int),std::string &>::iterator,
-[00:01:11]                      _Iter=itertools::map<int (__cdecl *)(int),std::string &>::iterator
-[00:01:11]                  ]
-[00:01:11]          C:\projects\itertools\test\test_map.cpp(34): note: see reference to function template instantiation '_OutIt std::copy<itertools::map<int (__cdecl *)(int),std::string &>::iterator,std::back_insert_iterator<std::string>>(_InIt,_InIt,_OutIt)' being compiled
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _OutIt=std::back_insert_iterator<std::string>,
-[00:01:11]                      _InIt=itertools::map<int (__cdecl *)(int),std::string &>::iterator
-[00:01:11]                  ]
-[00:01:11]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(463): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::value_type': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Ty=int
-[00:01:11]                  ]
-[00:01:11]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4295): note: see declaration of 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::value_type'
-[00:01:11]                  with
-[00:01:11]                  [
-[00:01:11]                      _Ty=int
-[00:01:11]                  ]
-[00:01:11]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(464): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::difference_type': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:12]                  with
-[00:01:12]                  [
-[00:01:12]                      _Ty=int
-[00:01:12]                  ]
-[00:01:12]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4296): note: see declaration of 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::difference_type'
-[00:01:12]                  with
-[00:01:12]                  [
-[00:01:12]                      _Ty=int
-[00:01:12]                  ]
-[00:01:12]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(466): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::pointer': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:12]                  with
-[00:01:12]                  [
-[00:01:12]                      _Ty=int
-[00:01:12]                  ]
-[00:01:12]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4297): note: see declaration of 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::pointer'
-[00:01:12]                  with
-[00:01:12]                  [
-[00:01:12]                      _Ty=int
-[00:01:12]                  ]
-[00:01:12]      5>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(467): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::reference': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:12]                  with
-[00:01:12]                  [
-[00:01:12]                      _Ty=int
-[00:01:12]                  ]
-[00:01:12]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(4298): note: see declaration of 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::reference'
-[00:01:12]                  with
-[00:01:12]                  [
-[00:01:12]                      _Ty=int
-[00:01:12]                  ]
-[00:01:12]          Generating Code...
-[00:01:20]        MakeDirsForLink:
-[00:01:20]          Creating directory "C:\projects\itertools\Build\lib\".
-[00:01:20]        Link:
-[00:01:20]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"C:\projects\itertools\Build\bin\test_itertools.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:/Users/appveyor/.conan/data/Catch2/2.8.0/catchorg/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib /LIBPATH:C:/Users/appveyor/.conan/data/Catch2/2.8.0/catchorg/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib/Release /LIBPATH:"C:\Tools\vcpkg\installed\x86-windows\lib" /LIBPATH:"C:\Tools\vcpkg\installed\x86-windows\lib\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\Tools\vcpkg\installed\x86-windows\lib\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:/projects/itertools/Build/bin/test_itertools.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/projects/itertools/Build/lib/test_itertools.lib" /MACHINE:X86 /SAFESEH  /machine:X86 test_itertools.dir\Release\test_main.obj
-[00:01:20]          test_itertools.dir\Release\test_iterable_wrapper.obj
-[00:01:20]          test_itertools.dir\Release\test_enumerate.obj
-[00:01:20]          test_itertools.dir\Release\test_zip.obj
-[00:01:20]          test_itertools.dir\Release\test_range.obj
-[00:01:20]          test_itertools.dir\Release\test_rvalue_ref_to_array.obj
-[00:01:20]          test_itertools.dir\Release\test_map.obj
-[00:01:21]          test_itertools.vcxproj -> C:\projects\itertools\Build\bin\test_itertools.exe
-[00:01:21]        AppLocalFromInstalled:
-[00:01:21]          C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -noprofile -File "C:\Tools\vcpkg\scripts\buildsystems\msbuild\applocal.ps1" "C:\projects\itertools\Build\bin\test_itertools.exe" "C:\Tools\vcpkg\installed\x86-windows\bin" "test_itertools.dir\Release\test_itertools.tlog\test_itertools.write.1u.tlog" "test_itertools.dir\Release\vcpkg.applocal.log"
-[00:01:23]        PostBuildEvent:
-[00:01:23]          setlocal
-[00:01:23]          "C:\Program Files (x86)\CMake\bin\cmake.exe" -D TEST_TARGET=test_itertools -D TEST_EXECUTABLE=C:/projects/itertools/Build/bin/test_itertools.exe -D TEST_EXECUTOR= -D TEST_WORKING_DIR=C:/projects/itertools/Build -D TEST_SPEC= -D TEST_EXTRA_ARGS= -D TEST_PROPERTIES= -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_LIST=test_itertools_TESTS -D CTEST_FILE=C:/projects/itertools/Build/test_itertools_tests-b858cb2.cmake -P C:/Users/appveyor/.conan/data/Catch2/2.8.0/catchorg/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib/cmake/Catch2/CatchAddTests.cmake
-[00:01:23]          if %errorlevel% neq 0 goto :cmEnd
-[00:01:23]          :cmEnd
-[00:01:23]          endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
-[00:01:23]          :cmErrorLevel
-[00:01:23]          exit /b %1
-[00:01:23]          :cmDone
-[00:01:23]          if %errorlevel% neq 0 goto :VCEnd
-[00:01:23]          :VCEnd
-[00:01:23]        FinalizeBuildStatus:
-[00:01:23]          Deleting file "test_itertools.dir\Release\test_itertools.tlog\unsuccessfulbuild".
-[00:01:23]          Touching "test_itertools.dir\Release\test_itertools.tlog\test_itertools.lastbuildstate".
-[00:01:23]      5>Done Building Project "C:\projects\itertools\Build\test_itertools.vcxproj" (default targets).
-[00:01:23]      3>Done Building Project "C:\projects\itertools\Build\test_itertools.vcxproj.metaproj" (default targets).
-[00:01:24]      2>Project "C:\projects\itertools\Build\ALL_BUILD.vcxproj.metaproj" (2) is building "C:\projects\itertools\Build\ALL_BUILD.vcxproj" (6) on node 1 (default targets).
-[00:01:24]      6>PrepareForBuild:
-[00:01:24]          Creating directory "Win32\Release\ALL_BUILD\".
-[00:01:24]          Creating directory "Win32\Release\ALL_BUILD\ALL_BUILD.tlog\".
-[00:01:24]        InitializeBuildStatus:
-[00:01:24]          Creating "Win32\Release\ALL_BUILD\ALL_BUILD.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-[00:01:24]        CustomBuild:
-[00:01:24]          Building Custom Rule C:/projects/itertools/CMakeLists.txt
-[00:01:24]          CMake does not need to re-run because C:/projects/itertools/Build/CMakeFiles/generate.stamp is up-to-date.
-[00:01:24]        FinalizeBuildStatus:
-[00:01:24]          Deleting file "Win32\Release\ALL_BUILD\ALL_BUILD.tlog\unsuccessfulbuild".
-[00:01:24]          Touching "Win32\Release\ALL_BUILD\ALL_BUILD.tlog\ALL_BUILD.lastbuildstate".
-[00:01:24]      6>Done Building Project "C:\projects\itertools\Build\ALL_BUILD.vcxproj" (default targets).
-[00:01:24]      2>Done Building Project "C:\projects\itertools\Build\ALL_BUILD.vcxproj.metaproj" (default targets).
-[00:01:24]      1>Done Building Project "C:\projects\itertools\Build\itertools.sln" (default targets).
-[00:01:24] 
-[00:01:24] Build succeeded.
-[00:01:24] 
-[00:01:24]        "C:\projects\itertools\Build\itertools.sln" (default target) (1) ->
-[00:01:24]        "C:\projects\itertools\Build\test_itertools.vcxproj.metaproj" (default target) (3) ->
-[00:01:24]        "C:\projects\itertools\Build\test_itertools.vcxproj" (default target) (5) ->
-[00:01:24]        (ClCompile target) -> 
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(462): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::iterator_category': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(463): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::value_type': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(464): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::difference_type': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(466): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::pointer': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(467): warning C4996: 'std::iterator<std::forward_iterator_tag,std::tuple<itertools::iterable_traits<itertools::range<int> &&>::deref_value_type,itertools::iterable_traits<itertools::range<int> &&>::deref_value_type>,ptrdiff_t,_Ty *,_Ty &>::reference': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(462): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::iterator_category': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(463): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::value_type': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(464): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::difference_type': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(466): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::pointer': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\xutility(467): warning C4996: 'std::iterator<std::forward_iterator_tag,int,ptrdiff_t,_Ty *,_Ty &>::reference': warning STL4015: The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17. (The <iterator> header is NOT deprecated.) The C++ Standard has never required user-defined iterators to derive from std::iterator. To fix this warning, stop deriving from std::iterator and start providing publicly accessible typedefs named iterator_category, value_type, difference_type, pointer, and reference. Note that value_type is required to be non-const, even for constant iterators. You can define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning. [C:\projects\itertools\Build\test_itertools.vcxproj]
-[00:01:24] 
-[00:01:24]     10 Warning(s)
-[00:01:24]     0 Error(s)
-[00:01:24] 
-[00:01:24] Time Elapsed 00:00:28.26
-[00:01:24] set CTEST_OUTPUT_ON_FAILURE=1
-[00:01:24] .\misc\appveyorTestRunScript.bat
-[00:01:24] Test project C:/projects/itertools/Build
-[00:01:24]       Start  1: rvalue ref as member should expand object's life time
-[00:01:24]       Start  2: Anonymous test case 1
-[00:01:24]  1/18 Test  #1: rvalue ref as member should expand object's life time ...***Failed    0.01 sec
-[00:01:24] Filters: rvalue ref as member should expand object's life time
-[00:01:24] 
-[00:01:24] ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[00:01:24] test_itertools.exe is a Catch v2.8.0 host application.
-[00:01:24] Run with -? for options
-[00:01:24] 
-[00:01:24] -------------------------------------------------------------------------------
-[00:01:24] rvalue ref as member should expand object's life time
-[00:01:24] -------------------------------------------------------------------------------
-[00:01:24] C:\projects\itertools\test\test_iterable_wrapper.cpp(26)
-[00:01:24] ...............................................................................
-[00:01:24] 
-[00:01:24] C:\projects\itertools\test\test_iterable_wrapper.cpp(28): FAILED:
-[00:01:24]   REQUIRE( w.t == std::vector{1, 2, 3} )
-[00:01:24] with expansion:
-[00:01:24]   {  } == { 1, 2, 3 }
-[00:01:24] 
-[00:01:24] ===============================================================================
-[00:01:24] test cases: 1 | 1 failed
-[00:01:24] assertions: 1 | 1 failed
-[00:01:24] 
-[00:01:24] 
-[00:01:24]       Start  3: Anonymous test case 2
-[00:01:24]  2/18 Test  #2: Anonymous test case 1 ...................................   Passed    0.02 sec
-[00:01:24]       Start  4: Anonymous test case 3
-[00:01:24]  3/18 Test  #3: Anonymous test case 2 ...................................   Passed    0.01 sec
-[00:01:24]       Start  5: Anonymous test case 4
-[00:01:24]  4/18 Test  #4: Anonymous test case 3 ...................................   Passed    0.02 sec
-[00:01:24]       Start  6: Anonymous test case 5
-[00:01:24]  5/18 Test  #5: Anonymous test case 4 ...................................   Passed    0.03 sec
-[00:01:24]       Start  7: all wrapped iterable is lvalue
-[00:01:24]  6/18 Test  #6: Anonymous test case 5 ...................................   Passed    0.01 sec
-[00:01:24]       Start  8: all wrapped iterable is rvalue
-[00:01:24]  7/18 Test  #7: all wrapped iterable is lvalue ..........................   Passed    0.01 sec
-[00:01:24]       Start  9: mixed lvalue and rvalue
-[00:01:24]  8/18 Test  #8: all wrapped iterable is rvalue ..........................   Passed    0.01 sec
-[00:01:24]       Start 10: zip one or more iterable
-[00:01:24]  9/18 Test  #9: mixed lvalue and rvalue .................................   Passed    0.01 sec
-[00:01:24]       Start 11: range is a user-friendly integral loop
-[00:01:24] 10/18 Test #10: zip one or more iterable ................................   Passed    0.01 sec
-[00:01:24]       Start 12: zip 2 ranges
-[00:01:24] 11/18 Test #11: range is a user-friendly integral loop ..................   Passed    0.01 sec
-[00:01:24]       Start 13: common types of integrals
-[00:01:24] 12/18 Test #12: zip 2 ranges ............................................   Passed    0.01 sec
-[00:01:24]       Start 14: range with different integer type
-[00:01:24] 13/18 Test #13: common types of integrals ...............................   Passed    0.02 sec
-[00:01:24]       Start 15: Anonymous test case 6
-[00:01:24] 14/18 Test #14: range with different integer type .......................   Passed    0.01 sec
-[00:01:24]       Start 16: map a single iterable
-[00:01:24] 15/18 Test #15: Anonymous test case 6 ...................................   Passed    0.01 sec
-[00:01:24]       Start 17: map a list of iterables
-[00:01:24] 16/18 Test #16: map a single iterable ...................................   Passed    0.01 sec
-[00:01:24]       Start 18: map a range
-[00:01:24] 17/18 Test #17: map a list of iterables .................................   Passed    0.01 sec
-[00:01:24] 18/18 Test #18: map a range .............................................   Passed    0.01 sec
-[00:01:24] 
-[00:01:24] 94% tests passed, 1 tests failed out of 18
-[00:01:24] 
-[00:01:24] Label Time Summary:
-[00:01:24] [WrapperBase]    =   0.03 sec*proc (2 tests)
-[00:01:24] [enumerate]      =   0.06 sec*proc (3 tests)
-[00:01:24] [lvalue]         =   0.03 sec*proc (2 tests)
-[00:01:24] [map]            =   0.03 sec*proc (3 tests)
-[00:01:24] [range]          =   0.05 sec*proc (5 tests)
-[00:01:24] [rvalue]         =   0.04 sec*proc (2 tests)
-[00:01:24] [util]           =   0.02 sec*proc (1 test)
-[00:01:24] [zip]            =   0.06 sec*proc (5 tests)
-[00:01:24] 
-[00:01:24] Total Test time (real) =   0.16 sec
-[00:01:24] 
-[00:01:24] The following tests FAILED:
-[00:01:24] 	  1 - rvalue ref as member should expand object's life time (Failed)
-[00:01:24] Errors while running CTest
-[00:01:24] Command exited with code 8
+[00:00:07] Collecting distro<1.2.0,>=1.0.2 (from conan)
+[00:00:07]   Downloading https://files.pythonhosted.org/packages/b0/55/29bfd4d4d4149e860ed01aa446108eb17b240997b746c06a2d0c8ce04f69/distro-1.1.0-py2.py3-none-any.whl
+[00:00:07] Collecting pylint!=2.3.0,>=1.9.3 (from conan)
+[00:00:07]   Downloading https://files.pythonhosted.org/packages/59/65/adcffa71fe942313c4d9e9284565d9a9e67798f4771f464e1d5dd58fea88/pylint-1.9.4-py2.py3-none-any.whl (689kB)
+[00:00:08] Collecting future==0.16.0 (from conan)
+[00:00:08]   Downloading https://files.pythonhosted.org/packages/00/2b/8d082ddfed935f3608cc61140df6dcbf0edea1bc3ab52fb6c29ae3e81e85/future-0.16.0.tar.gz (824kB)
+[00:00:09] Collecting pygments<3.0,>=2.0 (from conan)
+[00:00:09]   Downloading https://files.pythonhosted.org/packages/5c/73/1dfa428150e3ccb0fa3e68db406e5be48698f2a979ccbcec795f28f44048/Pygments-2.4.2-py2.py3-none-any.whl (883kB)
+[00:00:10] Collecting astroid>=1.6.5 (from conan)
+[00:00:10]   Downloading https://files.pythonhosted.org/packages/8b/29/0f7ec6fbf28a158886b7de49aee3a77a8a47a7e24c60e9fd6ec98ee2ec02/astroid-1.6.6-py2.py3-none-any.whl (305kB)
+[00:00:10] Collecting deprecation<2.1,>=2.0 (from conan)
+[00:00:10]   Downloading https://files.pythonhosted.org/packages/32/e9/01ffbaf3540ad54476cd7066439d629f1dd73b851cc5c0993ce2c12e1cdd/deprecation-2.0.6-py2.py3-none-any.whl
+[00:00:10] Collecting tqdm<5,>=4.28.1 (from conan)
+[00:00:10]   Downloading https://files.pythonhosted.org/packages/45/af/685bf3ce889ea191f3b916557f5677cc95a5e87b2fa120d74b5dd6d049d0/tqdm-4.32.1-py2.py3-none-any.whl (49kB)
+[00:00:10] Collecting Jinja2<3,>=2.3 (from conan)
+[00:00:10]   Downloading https://files.pythonhosted.org/packages/1d/e7/fd8b501e7a6dfe492a433deb7b9d833d39ca74916fa8bc63dd1a4947a671/Jinja2-2.10.1-py2.py3-none-any.whl (124kB)
+[00:00:10] Collecting python-dateutil<3,>=2.6.0 (from conan)
+[00:00:10]   Downloading https://files.pythonhosted.org/packages/41/17/c62faccbfbd163c7f57f3844689e3a78bae1f403648a6afb1d0866d87fbb/python_dateutil-2.8.0-py2.py3-none-any.whl (226kB)
+[00:00:10] Collecting bottle<0.13,>=0.12.8 (from conan)
+[00:00:11]   Downloading https://files.pythonhosted.org/packages/32/4e/ed046324d5ec980c252987c1dca191e001b9f06ceffaebf037eef469937c/bottle-0.12.16.tar.gz (72kB)
+[00:00:11] Collecting pluginbase<1.0,>=0.5 (from conan)
+[00:00:11]   Downloading https://files.pythonhosted.org/packages/6e/f4/1db0a26c1c7fad81a1214ad1b02839a7bd98d8ba68f782f6edcc3d343441/pluginbase-0.7.tar.gz (40kB)
+[00:00:11] Collecting certifi>=2017.4.17 (from requests<3.0.0,>=2.8.1->conan)
+[00:00:11]   Downloading https://files.pythonhosted.org/packages/60/75/f692a584e85b7eaba0e03827b3d51f45f571c2e793dd731e598828d380aa/certifi-2019.3.9-py2.py3-none-any.whl (158kB)
+[00:00:11] Collecting urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 (from requests<3.0.0,>=2.8.1->conan)
+[00:00:12]   Downloading https://files.pythonhosted.org/packages/e6/60/247f23a7121ae632d62811ba7f273d0e58972d75e58a94d329d51550a47d/urllib3-1.25.3-py2.py3-none-any.whl (150kB)
+[00:00:12] Collecting idna<2.9,>=2.5 (from requests<3.0.0,>=2.8.1->conan)
+[00:00:12]   Downloading https://files.pythonhosted.org/packages/14/2c/cd551d81dbe15200be1cf41cd03869a46fe7226e7450af7a6545bfc474c9/idna-2.8-py2.py3-none-any.whl (58kB)
+[00:00:12] Collecting chardet<3.1.0,>=3.0.2 (from requests<3.0.0,>=2.8.1->conan)
+[00:00:12]   Downloading https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl (133kB)
+[00:00:12] Collecting monotonic>=0.1 (from fasteners>=0.14.1->conan)
+[00:00:12]   Downloading https://files.pythonhosted.org/packages/ac/aa/063eca6a416f397bd99552c534c6d11d57f58f2e94c14780f3bbf818c4cf/monotonic-1.5-py2.py3-none-any.whl
+[00:00:12] Collecting isort>=4.2.5 (from pylint!=2.3.0,>=1.9.3->conan)
+[00:00:12]   Downloading https://files.pythonhosted.org/packages/1c/d9/bf5848b376e441ff358a14b954476423eeeb8c9b78c10074b7f53ce2918d/isort-4.3.20-py2.py3-none-any.whl (42kB)
+[00:00:12] Collecting singledispatch; python_version < "3.4" (from pylint!=2.3.0,>=1.9.3->conan)
+[00:00:12]   Downloading https://files.pythonhosted.org/packages/c5/10/369f50bcd4621b263927b0a1519987a04383d4a98fb10438042ad410cf88/singledispatch-3.4.0.3-py2.py3-none-any.whl
+[00:00:12] Collecting configparser; python_version == "2.7" (from pylint!=2.3.0,>=1.9.3->conan)
+[00:00:12]   Downloading https://files.pythonhosted.org/packages/ba/05/6c96328e92e625fc31445d24d75a2c92ef9ba34fc5b037fe69693c362a0d/configparser-3.7.4-py2.py3-none-any.whl
+[00:00:12] Collecting backports.functools-lru-cache; python_version == "2.7" (from pylint!=2.3.0,>=1.9.3->conan)
+[00:00:12]   Downloading https://files.pythonhosted.org/packages/03/8e/2424c0e65c4a066e28f539364deee49b6451f8fcd4f718fefa50cc3dcf48/backports.functools_lru_cache-1.5-py2.py3-none-any.whl
+[00:00:12] Collecting mccabe (from pylint!=2.3.0,>=1.9.3->conan)
+[00:00:13]   Downloading https://files.pythonhosted.org/packages/87/89/479dc97e18549e21354893e4ee4ef36db1d237534982482c3681ee6e7b57/mccabe-0.6.1-py2.py3-none-any.whl
+[00:00:13] Collecting enum34>=1.1.3; python_version < "3.4" (from astroid>=1.6.5->conan)
+[00:00:13]   Downloading https://files.pythonhosted.org/packages/c5/db/e56e6b4bbac7c4a06de1c50de6fe1ef3810018ae11732a50f15f62c7d050/enum34-1.1.6-py2-none-any.whl
+[00:00:13] Collecting lazy-object-proxy (from astroid>=1.6.5->conan)
+[00:00:13]   Downloading https://files.pythonhosted.org/packages/39/36/cb2b3be5cb25537000670dbcfcf013873b6d970b1ba0edeb100c137e7d47/lazy_object_proxy-1.4.1-cp27-cp27m-win32.whl
+[00:00:13] Collecting wrapt (from astroid>=1.6.5->conan)
+[00:00:13]   Downloading https://files.pythonhosted.org/packages/67/b2/0f71ca90b0ade7fad27e3d20327c996c6252a2ffe88f50a95bba7434eda9/wrapt-1.11.1.tar.gz
+[00:00:13] Collecting packaging (from deprecation<2.1,>=2.0->conan)
+[00:00:13]   Downloading https://files.pythonhosted.org/packages/91/32/58bc30e646e55eab8b21abf89e353f59c0cc02c417e42929f4a9546e1b1d/packaging-19.0-py2.py3-none-any.whl
+[00:00:13] Collecting MarkupSafe>=0.23 (from Jinja2<3,>=2.3->conan)
+[00:00:13]   Downloading https://files.pythonhosted.org/packages/20/40/49d725372f8f49df9891e7ea5f5d36489da85a277621177ad4af68992769/MarkupSafe-1.1.1-cp27-cp27m-win32.whl
+[00:00:13] Collecting futures; python_version < "3.2" (from isort>=4.2.5->pylint!=2.3.0,>=1.9.3->conan)
+[00:00:13]   Downloading https://files.pythonhosted.org/packages/2d/99/b2c4e9d5a30f6471e410a146232b4118e697fa3ffc06d6a65efde84debd0/futures-3.2.0-py2-none-any.whl
+[00:00:14] Collecting pyparsing>=2.0.2 (from packaging->deprecation<2.1,>=2.0->conan)
+[00:00:14]   Downloading https://files.pythonhosted.org/packages/dd/d9/3ec19e966301a6e25769976999bd7bbe552016f0d32b577dc9d63d2e0c49/pyparsing-2.4.0-py2.py3-none-any.whl (62kB)
+[00:00:14] Installing collected packages: PyJWT, certifi, urllib3, idna, chardet, requests, colorama, PyYAML, patch, six, monotonic, fasteners, node-semver, distro, backports.functools-lru-cache, futures, isort, enum34, lazy-object-proxy, singledispatch, wrapt, astroid, configparser, mccabe, pylint, future, pygments, pyparsing, packaging, deprecation, tqdm, MarkupSafe, Jinja2, python-dateutil, bottle, pluginbase, conan
+[00:00:15]   Running setup.py install for patch: started
+[00:00:15]     Running setup.py install for patch: finished with status 'done'
+[00:00:16]   Running setup.py install for node-semver: started
+[00:00:16]     Running setup.py install for node-semver: finished with status 'done'
+[00:00:16]   Running setup.py install for wrapt: started
+[00:00:17]     Running setup.py install for wrapt: finished with status 'done'
+[00:00:21]   Running setup.py install for future: started
+[00:00:22]     Running setup.py install for future: finished with status 'done'
+[00:00:24]   Running setup.py install for bottle: started
+[00:00:24]     Running setup.py install for bottle: finished with status 'done'
+[00:00:24]   Running setup.py install for pluginbase: started
+[00:00:25]     Running setup.py install for pluginbase: finished with status 'done'
+[00:00:25]   Running setup.py install for conan: started
+[00:00:26]     Running setup.py install for conan: finished with status 'done'
+[00:00:26] Successfully installed Jinja2-2.10.1 MarkupSafe-1.1.1 PyJWT-1.7.1 PyYAML-5.1.1 astroid-1.6.6 backports.functools-lru-cache-1.5 bottle-0.12.16 certifi-2019.3.9 chardet-3.0.4 colorama-0.4.1 conan-1.16.0 configparser-3.7.4 deprecation-2.0.6 distro-1.1.0 enum34-1.1.6 fasteners-0.15 future-0.16.0 futures-3.2.0 idna-2.8 isort-4.3.20 lazy-object-proxy-1.4.1 mccabe-0.6.1 monotonic-1.5 node-semver-0.6.1 packaging-19.0 patch-1.16 pluginbase-0.7 pygments-2.4.2 pylint-1.9.4 pyparsing-2.4.0 python-dateutil-2.8.0 requests-2.22.0 singledispatch-3.4.0.3 six-1.12.0 tqdm-4.32.1 urllib3-1.25.3 wrapt-1.11.1
+[00:00:27] You are using pip version 18.1, however version 19.1.1 is available.
+[00:00:27] You should consider upgrading via the 'python -m pip install --upgrade pip' command.
+[00:00:27] mkdir Build
+[00:00:27] cd Build
+[00:00:28] conan install ..
+[00:00:29] Auto detecting your dev setup to initialize the default profile (C:\Users\appveyor\.conan\profiles\default)
+[00:00:29] Found Visual Studio 15
+[00:00:29] Found clang 8.0
+[00:00:29] clang>=8, using the major as version
+[00:00:29] Default settings
+[00:00:29] 	os=Windows
+[00:00:29] 	os_build=Windows
+[00:00:29] 	arch=x86_64
+[00:00:29] 	arch_build=x86_64
+[00:00:29] 	compiler=Visual Studio
+[00:00:29] 	compiler.version=15
+[00:00:29] 	build_type=Release
+[00:00:29] *** You can change them in C:\Users\appveyor\.conan\profiles\default ***
+[00:00:29] *** Or override with -s compiler='other' -s ...s***
+[00:00:29] 
+[00:00:29] 
+[00:00:29] WARN: Remotes registry file missing, creating default one in C:\Users\appveyor\.conan\remotes.json
+[00:00:29] Configuration:
+[00:00:29] [settings]
+[00:00:29] arch=x86_64
+[00:00:29] arch_build=x86_64
+[00:00:29] build_type=Release
+[00:00:29] compiler=Visual Studio
+[00:00:29] compiler.runtime=MD
+[00:00:29] compiler.version=15
+[00:00:29] os=Windows
+[00:00:29] os_build=Windows
+[00:00:29] [options]
+[00:00:29] [build_requires]
+[00:00:29] [env]
+[00:00:29] 
+[00:00:29] Catch2/2.8.0@catchorg/stable: Not found in local cache, looking in remotes...
+[00:00:29] Catch2/2.8.0@catchorg/stable: Trying with 'conan-center'...
+[00:00:30] Downloading conanmanifest.txt
+[00:00:31] 
+[00:00:31] Downloading conanfile.py
+[00:00:31] 
+[00:00:31] Downloading conan_export.tgz
+[00:00:31] 
+[00:00:31] ....
+[00:00:31] Catch2/2.8.0@catchorg/stable: Downloaded recipe revision 0
+[00:00:31] conanfile.txt: Installing package
+[00:00:31] Requirements
+[00:00:31]     Catch2/2.8.0@catchorg/stable from 'conan-center' - Downloaded
+[00:00:31] Packages
+[00:00:31]     Catch2/2.8.0@catchorg/stable:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9 - Download
+[00:00:31] 
+[00:00:31] Catch2/2.8.0@catchorg/stable: Retrieving package 5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9 from remote 'conan-center' 
+[00:00:32] Downloading conanmanifest.txt
+[00:00:32] 
+[00:00:32] Downloading conaninfo.txt
+[00:00:32] 
+[00:00:32] Downloading conan_package.tgz
+[00:00:32] 
+[00:00:32] ....
+[00:00:32] Catch2/2.8.0@catchorg/stable: Package installed 5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+[00:00:32] Catch2/2.8.0@catchorg/stable: Downloaded package revision 0
+[00:00:32] conanfile.txt: Generator txt created conanbuildinfo.txt
+[00:00:32] conanfile.txt: Generator cmake created conanbuildinfo.cmake
+[00:00:32] conanfile.txt: Generated conaninfo.txt
+[00:00:32] conanfile.txt: Generated graphinfo
+[00:00:33] cd ..
+[00:00:33] .\misc\appveyorBuildConfigurationScript.bat
+[00:00:33] -- Building for: Visual Studio 15 2017
+[00:00:46] -- The CXX compiler identification is MSVC 19.16.27030.1
+[00:00:47] -- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe
+[00:00:54] -- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe -- works
+[00:00:54] -- Detecting CXX compiler ABI info
+[00:01:02] -- Detecting CXX compiler ABI info - done
+[00:01:02] -- Detecting CXX compile features
+[00:01:10] -- Detecting CXX compile features - done
+[00:01:10] -- Conan: Adjusting output directories
+[00:01:10] -- Conan: Using cmake global configuration
+[00:01:10] -- Conan: Adjusting default RPATHs Conan policies
+[00:01:10] -- Conan: Adjusting language standard
+[00:01:10] -- Current conanbuildinfo.cmake directory: C:/projects/itertools/Build
+[00:01:10] -- C:/Users/appveyor/.conan/data/Catch2/2.8.0/catchorg/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib
+[00:01:10] -- Configuring done
+[00:01:10] -- Generating done
+[00:01:10] CMake Warning:
+[00:01:10]   Manually-specified variables were not used by the project:
+[00:01:10] 
+[00:01:10]     ITERTOOLS_BUILD_EXAMPLES
+[00:01:10]     ITERTOOLS_BUILD_EXTRA_TESTS
+[00:01:10]     USE_WMAIN
+[00:01:10] 
+[00:01:10] 
+[00:01:10] -- Build files have been written to: C:/projects/itertools/Build
+[00:01:10] msbuild "C:\projects\itertools\Build\itertools.sln" /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+[00:01:11] Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+[00:01:11] Copyright (C) Microsoft Corporation. All rights reserved.
+[00:01:11] 
+[00:01:12] Build started 6/10/2019 2:59:39 PM.
+[00:01:13]      1>Project "C:\projects\itertools\Build\itertools.sln" on node 1 (default targets).
+[00:01:13]      1>ValidateSolutionConfiguration:
+[00:01:13]          Building solution configuration "Debug|Win32".
+[00:01:13]        ValidateProjects:
+[00:01:13]          The project "Continuous" is not selected for building in solution configuration "Debug|Win32".
+[00:01:13]          The project "Experimental" is not selected for building in solution configuration "Debug|Win32".
+[00:01:13]          The project "INSTALL" is not selected for building in solution configuration "Debug|Win32".
+[00:01:13]          The project "Nightly" is not selected for building in solution configuration "Debug|Win32".
+[00:01:13]          The project "NightlyMemoryCheck" is not selected for building in solution configuration "Debug|Win32".
+[00:01:13]          The project "RUN_TESTS" is not selected for building in solution configuration "Debug|Win32".
+[00:01:16]      1>Project "C:\projects\itertools\Build\itertools.sln" (1) is building "C:\projects\itertools\Build\ALL_BUILD.vcxproj.metaproj" (2) on node 1 (default targets).
+[00:01:16]      2>Project "C:\projects\itertools\Build\ALL_BUILD.vcxproj.metaproj" (2) is building "C:\projects\itertools\Build\ZERO_CHECK.vcxproj" (4) on node 2 (default targets).
+[00:01:16]      4>PrepareForBuild:
+[00:01:16]          Creating directory "Win32\Debug\ZERO_CHECK\".
+[00:01:16]          Creating directory "C:\projects\itertools\Build\Debug\".
+[00:01:16]          Creating directory "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\".
+[00:01:16]        InitializeBuildStatus:
+[00:01:16]          Creating "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+[00:01:16]        CustomBuild:
+[00:01:16]          Checking Build System
+[00:01:16]          CMake does not need to re-run because C:/projects/itertools/Build/CMakeFiles/generate.stamp is up-to-date.
+[00:01:17]        FinalizeBuildStatus:
+[00:01:17]          Deleting file "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild".
+[00:01:17]          Touching "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\ZERO_CHECK.lastbuildstate".
+[00:01:17]      4>Done Building Project "C:\projects\itertools\Build\ZERO_CHECK.vcxproj" (default targets).
+[00:01:17]      1>Project "C:\projects\itertools\Build\itertools.sln" (1) is building "C:\projects\itertools\Build\test_itertools.vcxproj.metaproj" (3) on node 1 (default targets).
+[00:01:17]      3>Project "C:\projects\itertools\Build\test_itertools.vcxproj.metaproj" (3) is building "C:\projects\itertools\Build\test_itertools.vcxproj" (5) on node 1 (default targets).
+[00:01:17]      5>PrepareForBuild:
+[00:01:17]          Creating directory "test_itertools.dir\Debug\".
+[00:01:17]          Creating directory "C:\projects\itertools\Build\bin\".
+[00:01:17]          Creating directory "test_itertools.dir\Debug\test_itertools.tlog\".
+[00:01:17]        InitializeBuildStatus:
+[00:01:17]          Creating "test_itertools.dir\Debug\test_itertools.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+[00:01:17]        CustomBuild:
+[00:01:17]          Building Custom Rule C:/projects/itertools/CMakeLists.txt
+[00:01:17]          CMake does not need to re-run because C:/projects/itertools/Build/CMakeFiles/generate.stamp is up-to-date.
+[00:01:17]        VcpkgTripletSelection:
+[00:01:17]          Using triplet "x86-windows" from "C:\Tools\vcpkg\installed\x86-windows\"
+[00:01:17]        ClCompile:
+[00:01:17]          C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /IC:\Users\appveyor\.conan\data\Catch2\2.8.0\catchorg\stable\package\5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9\include /IC:\projects\itertools\include /I"C:\Tools\vcpkg\installed\x86-windows\include" /Zi /nologo /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"test_itertools.dir\Debug\\" /Fd"test_itertools.dir\Debug\vc141.pdb" /Gd /TP /analyze- /errorReport:queue  /permissive- C:\projects\itertools\test\test_filter.cpp C:\projects\itertools\test\test_repeat.cpp C:\projects\itertools\test\test_main.cpp C:\projects\itertools\test\test_iterable_wrapper.cpp C:\projects\itertools\test\test_enumerate.cpp C:\projects\itertools\test\test_zip.cpp C:\projects\itertools\test\test_range.cpp C:\projects\itertools\test\test_compose.cpp C:\projects\itertools\test\test_rvalue_ref_to_array.cpp C:\projects\itertools\test\test_map.cpp
+[00:01:17]          test_filter.cpp
+[00:01:19]      5>C:\projects\itertools\test\test_filter.cpp(39): warning C4552: '>': result of expression not used [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:21]          C:\projects\itertools\include\itertools/filter.h(28): note: see reference to function template instantiation 'bool ____C_A_T_C_H____T_E_S_T____2::<lambda_1d993fd931331d118137477cc2d5edca>::operator ()<int>(int) const' being compiled
+[00:01:21]          C:\projects\itertools\include\itertools/filter.h(25): note: while compiling class template member function 'int &itertools::basic_filter<Callable,Iterable,false>::iterator::operator *(void) const'
+[00:01:21]                  with
+[00:01:21]                  [
+[00:01:21]                      Callable=____C_A_T_C_H____T_E_S_T____2::<lambda_1d993fd931331d118137477cc2d5edca>,
+[00:01:21]                      Iterable=std::vector<int,std::allocator<int>> &&
+[00:01:21]                  ]
+[00:01:21]          C:\projects\itertools\test\test_filter.cpp(40): note: see reference to function template instantiation 'int &itertools::basic_filter<Callable,Iterable,false>::iterator::operator *(void) const' being compiled
+[00:01:21]                  with
+[00:01:21]                  [
+[00:01:21]                      Callable=____C_A_T_C_H____T_E_S_T____2::<lambda_1d993fd931331d118137477cc2d5edca>,
+[00:01:21]                      Iterable=std::vector<int,std::allocator<int>> &&
+[00:01:21]                  ]
+[00:01:21]          C:\projects\itertools\test\test_filter.cpp(39): note: see reference to class template instantiation 'itertools::basic_filter<Callable,Iterable,false>::iterator' being compiled
+[00:01:21]                  with
+[00:01:21]                  [
+[00:01:21]                      Callable=____C_A_T_C_H____T_E_S_T____2::<lambda_1d993fd931331d118137477cc2d5edca>,
+[00:01:21]                      Iterable=std::vector<int,std::allocator<int>> &&
+[00:01:21]                  ]
+[00:01:21]          test_repeat.cpp
+[00:01:21]      5>C:\projects\itertools\test\test_repeat.cpp(48): error C2672: 'map': no matching overloaded function found [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:21]      5>C:\projects\itertools\test\test_repeat.cpp(48): error C2783: 'itertools::map<Callable,Iterables...> itertools::map(Callable,Iterables &&...)': could not deduce template argument for 'Callable' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:21]          C:\projects\itertools\include\itertools/map.h(38): note: see declaration of 'itertools::map'
+[00:01:21]      5>C:\projects\itertools\test\test_repeat.cpp(48): error C2641: cannot deduce template argument for 'itertools::map' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:21]      5>C:\projects\itertools\test\test_repeat.cpp(48): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'itertools::map' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:21]          C:\projects\itertools\test\test_repeat.cpp(48): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+[00:01:21]      5>C:\projects\itertools\test\test_repeat.cpp(50): error C3536: 'm': cannot be used before it is initialized [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:21]      5>C:\projects\itertools\test\test_repeat.cpp(50): error C3312: no callable 'begin' function found for type 'int' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:21]      5>C:\projects\itertools\test\test_repeat.cpp(50): error C3312: no callable 'end' function found for type 'int' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:21]      5>C:\projects\itertools\test\test_repeat.cpp(51): error C2065: 'xval': undeclared identifier [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:21]          test_main.cpp
+[00:01:26]          test_iterable_wrapper.cpp
+[00:01:27]          test_enumerate.cpp
+[00:01:29]          test_zip.cpp
+[00:01:31]          test_range.cpp
+[00:01:32]          test_compose.cpp
+[00:01:34]          test_rvalue_ref_to_array.cpp
+[00:01:36]          test_map.cpp
+[00:01:38]          Generating Code...
+[00:01:40]      5>c:\projects\itertools\test\test_filter.cpp(39): error C4716: '<lambda_1d993fd931331d118137477cc2d5edca>::operator()<int>': must return a value [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40]      5>Done Building Project "C:\projects\itertools\Build\test_itertools.vcxproj" (default targets) -- FAILED.
+[00:01:40]      3>Done Building Project "C:\projects\itertools\Build\test_itertools.vcxproj.metaproj" (default targets) -- FAILED.
+[00:01:40]      2>Done Building Project "C:\projects\itertools\Build\ALL_BUILD.vcxproj.metaproj" (default targets) -- FAILED.
+[00:01:40]      1>Done Building Project "C:\projects\itertools\Build\itertools.sln" (default targets) -- FAILED.
+[00:01:40] 
+[00:01:40] Build FAILED.
+[00:01:40] 
+[00:01:40]        "C:\projects\itertools\Build\itertools.sln" (default target) (1) ->
+[00:01:40]        "C:\projects\itertools\Build\test_itertools.vcxproj.metaproj" (default target) (3) ->
+[00:01:40]        "C:\projects\itertools\Build\test_itertools.vcxproj" (default target) (5) ->
+[00:01:40]        (ClCompile target) -> 
+[00:01:40]          C:\projects\itertools\test\test_filter.cpp(39): warning C4552: '>': result of expression not used [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40] 
+[00:01:40] 
+[00:01:40]        "C:\projects\itertools\Build\itertools.sln" (default target) (1) ->
+[00:01:40]        "C:\projects\itertools\Build\test_itertools.vcxproj.metaproj" (default target) (3) ->
+[00:01:40]        "C:\projects\itertools\Build\test_itertools.vcxproj" (default target) (5) ->
+[00:01:40]        (ClCompile target) -> 
+[00:01:40]          C:\projects\itertools\test\test_repeat.cpp(48): error C2672: 'map': no matching overloaded function found [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40]          C:\projects\itertools\test\test_repeat.cpp(48): error C2783: 'itertools::map<Callable,Iterables...> itertools::map(Callable,Iterables &&...)': could not deduce template argument for 'Callable' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40]          C:\projects\itertools\test\test_repeat.cpp(48): error C2641: cannot deduce template argument for 'itertools::map' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40]          C:\projects\itertools\test\test_repeat.cpp(48): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'itertools::map' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40]          C:\projects\itertools\test\test_repeat.cpp(50): error C3536: 'm': cannot be used before it is initialized [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40]          C:\projects\itertools\test\test_repeat.cpp(50): error C3312: no callable 'begin' function found for type 'int' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40]          C:\projects\itertools\test\test_repeat.cpp(50): error C3312: no callable 'end' function found for type 'int' [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40]          C:\projects\itertools\test\test_repeat.cpp(51): error C2065: 'xval': undeclared identifier [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40]          c:\projects\itertools\test\test_filter.cpp(39): error C4716: '<lambda_1d993fd931331d118137477cc2d5edca>::operator()<int>': must return a value [C:\projects\itertools\Build\test_itertools.vcxproj]
+[00:01:40] 
+[00:01:40]     1 Warning(s)
+[00:01:40]     9 Error(s)
+[00:01:40] 
+[00:01:40] Time Elapsed 00:00:28.56
+[00:01:40] Command exited with code 1

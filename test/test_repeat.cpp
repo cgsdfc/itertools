@@ -44,8 +44,11 @@ TEST_CASE("repeat finite times") {
 TEST_CASE("example from pydoc", "[repeat][map][range]") {
   using itertools::map;
   using itertools::range;
-
+#ifdef _MSC_VER
+  auto m = map([](int x, int y) { return pow(x, y); }, range(10), repeat(2));
+#else
   auto m = map(::pow, range(10), repeat(2));
+#endif
   double val = 0;
   for (auto xval : m) {
     REQUIRE(xval == pow(val, 2));
