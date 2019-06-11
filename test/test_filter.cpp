@@ -36,7 +36,7 @@ TEST_CASE("single_step_iterator stepping", "[filter]") {
 
 TEST_CASE("loop over", "[filter]") {
   std::size_t i = 1;
-  for (auto val : filter([](auto val) -> bool { val > 0; },
+  for (auto val : filter([](auto val) -> bool { return val > 0; },
                          std::vector{-3, -2, -1, 0, 1, 2, 3})) {
     REQUIRE(val == i);
     REQUIRE(val > 0);
@@ -46,7 +46,7 @@ TEST_CASE("loop over", "[filter]") {
 
 TEST_CASE("filterfalse", "[filterfalse]") {
   auto ff = filterfalse([](auto &&str) -> bool { return !str.empty(); },
-                         std::array{""s, ""s, "a"s, "b"s, ""s});
+                        std::array{""s, ""s, "a"s, "b"s, ""s});
   for (auto &&str : ff) {
     REQUIRE(str.empty());
   }
