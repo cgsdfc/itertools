@@ -7,7 +7,7 @@ set( CMAKE_CXX_STANDARD 17 )
 include( ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake )
 conan_basic_setup()
 
-add_library( itertools INTERFACE )
+add_library( itertools INTERFACE  )
 target_include_directories( itertools INTERFACE include )
 
 enable_testing()
@@ -30,11 +30,13 @@ endif()
 add_executable( test_itertools test/test_filter.cpp test/test_repeat.cpp )
 target_sources( test_itertools PRIVATE
                 test/test_main.cpp
+                test/test_count.cpp
                 test/test_iterable_wrapper.cpp
                 test/test_enumerate.cpp
                 test/test_zip.cpp
                 test/test_range.cpp
                 test/test_compose.cpp
+                test/test_cycle.cpp
                 test/test_rvalue_ref_to_array.cpp
                 test/test_map.cpp )
 target_link_libraries( test_itertools itertools ${CONAN_LIBS} )
